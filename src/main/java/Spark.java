@@ -1,24 +1,27 @@
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
-
+import util.Deps;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-
 import static spark.Spark.*;
-
 public class Spark {
     public static Map map_ = new HashMap<>();
     public static VelocityTemplateEngine eng =  new VelocityTemplateEngine();
     public static ModelAndView OK = new ModelAndView(map_, "OK.html");
     public static ModelAndView BAD = new ModelAndView(map_, "Bad.html");
+    public static ModelAndView SOCKET = new ModelAndView(map_, "websocket.html");
+    public static Map<String, Object> model = new HashMap<>();
+    public static void main(String[] args) throws InterruptedException {
+        Deps deps = new Deps();
+        webSocket("/echo", EchoWebSocket.class);
 
-    public static void main(String[] args) {
-        redirect.get("/", "template-example");
+        get("websocket", (req, res) -> eng.render(SOCKET));
+
+        redirect.get("/", "login.area");
         get("/hello", (req, res) -> "Hello World");
-        get("template-example", (req, res) -> {
+        get("login.area", (req, res) -> {
             boolean authenticated=true;
             // ... check if authenticated
             if (!authenticated) {
@@ -35,26 +38,23 @@ public class Spark {
             return eng.render(BAD);
         });
         get("/login", (req, res) -> {
-            System.out.println("QUery::=>");
-            req.queryParams().forEach(a->{System.out.println(a);});
-            System.out.println("LOGIN::"+req.queryParams("login"));
-            System.out.println("PASS::"+req.queryParams("password"));
-
-
-            Map a = req.params();
-            System.out.println("login request");
-            Iterator<Map.Entry<String, String>> it = a.entrySet().iterator();
-            while (it.hasNext()) {
-                Map.Entry<String, String> pair = it.next();
-                System.out.println(pair.getKey()+ "...."+ pair.getValue());
+            String login = req.queryParams("login");
+            String pass = req.queryParams("password");
+            if (deps.loginchecker.checklogin(login, pass)) {
+                req.session().attribute("logined", true);
+                req.session().attribute("user", login);
+                model.clear();
+                model.put("user", login);
+                model.put("id", req.session().id());
+                return new VelocityTemplateEngine().render(
+                        new ModelAndView(model, "welcome.html")
+                );
             }
-            return eng.render(OK);
+            else
+                req.session().attribute("logined", false);
+                return eng.render(BAD);
         });
 
-        get("/hack", (req, res) ->{
-           req.session().attribute("logined", true);
-           return eng.render(      new ModelAndView(map_, "success.html")
-        );});
         get("/attr", (req,res)->{
             Set<String> attr = req.session().attributes();
             attr.forEach(a -> {System.out.println(a);});
@@ -73,4 +73,9 @@ public class Spark {
         if (req.session().attribute("logined").equals(true)) return true;
         return false;
     }
+
+    public static void flushsession(Request req){
+        req.session().attribute("logined", false);
+    }
+
 }
