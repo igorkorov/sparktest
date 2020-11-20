@@ -31,15 +31,11 @@ public class LoaderJSONTest {
         stmt.setInt(1, s1);
         stmt.setString(2, data);
         stmt.executeUpdate();
-      /*  ArrayList data_ = new ArrayList();
-        data_.add(++s1);
-        data_.add(data);
-        db.executor.insertPrepared("test", data_);*/
         res = ljson.loaderJSON();
         int s2 = res.size();
         System.out.println(s2);
         assertTrue(s2>(--s1));
-
+        res.forEach(a->System.out.println(a));
 
     }
 }
