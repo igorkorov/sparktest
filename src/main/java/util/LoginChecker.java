@@ -19,7 +19,7 @@ public class LoginChecker {
             add(login);
         }};
 
-        ResultSet  res = executor.executePrepared("SELECT * from users where login = ?", list);
+        ResultSet  res = executor.executePreparedSelect("SELECT * from users where login = ?", list);
         if (res.next())
             pass =res.getString("pass");
         if (password.equals(pass))
