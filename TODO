@@ -1,3 +1,3 @@
 Database structure:
 Table requests::
-ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Request updated (Changes) (JSON)
+ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Request updated (Changes) (JSON); Request completed(boolean: Int); Request approved(boolean : Int)
