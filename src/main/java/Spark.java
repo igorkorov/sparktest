@@ -1,3 +1,4 @@
+import org.jetbrains.annotations.NotNull;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -74,7 +75,7 @@ public class Spark {
         return false;
     }
 
-    public static void flushsession(Request req){
+    public static void flushsession(@NotNull Request req){
         req.session().attribute("logined", false);
     }
 

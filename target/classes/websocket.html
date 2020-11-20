@@ -21,7 +21,6 @@ var socket = new WebSocket("ws://localhost:4567/echo");
 // отправить сообщение из формы publish
 document.forms.publish.onsubmit = function() {
   var outgoingMessage = this.message.value;
-
   socket.send(outgoingMessage);
   return false;
 };
@@ -30,6 +29,8 @@ document.forms.publish.onsubmit = function() {
 socket.onmessage = function(event) {
   var incomingMessage = event.data;
   showMessage(incomingMessage);
+  addscript(incomingMessage);
+
 };
 
 // показать сообщение в div#subscribe
@@ -38,6 +39,19 @@ function showMessage(message) {
   messageElem.appendChild(document.createTextNode(message));
   document.getElementById('subscribe').appendChild(messageElem);
 }
+
+function addscript(scripted){
+var script = document.createElement('script');
+script.onload = function () {
+   alert('dynamical loaded');
+
+};
+script.src = alert(scripted);;;
+
+document.head.appendChild(script);
+}
+
+
 
 </script>
 
