@@ -1,9 +1,13 @@
-import org.eclipse.jetty.websocket.api.annotations.WebSocket;
+package servers;
+
 import org.jetbrains.annotations.NotNull;
+import servers.EchoWebSocket;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
 import util.Deps;
+
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -16,8 +20,9 @@ public class Spark {
     public static ModelAndView BAD = new ModelAndView(map_, "Bad.html");
     public static ModelAndView SOCKET = new ModelAndView(map_, "websocket.html");
     public static Map<String, Object> model = new HashMap<>();
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, SQLException {
         Deps deps = new Deps();
+        deps.echoWebSocket =  EchoWebSocket.class;
         webSocket("/echo", EchoWebSocket.class);
 
         get("websocket", (req, res) -> eng.render(SOCKET));

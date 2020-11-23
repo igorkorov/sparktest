@@ -1,11 +1,9 @@
 package util.readfile;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Properties;
-
 public class Readfile {
     private String filename;
     public Readfile(String filename){
@@ -31,10 +29,6 @@ public class Readfile {
         }
         return result;
     }
-
-
-
-
 
     public String AktorPORT(){
         FileInputStream fprop;

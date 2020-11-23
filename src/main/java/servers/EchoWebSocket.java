@@ -1,3 +1,5 @@
+package servers;
+
 import org.eclipse.jetty.websocket.api.*;
 import org.eclipse.jetty.websocket.api.annotations.*;
 import java.io.*;
@@ -29,7 +31,7 @@ public class EchoWebSocket {
     public static  void sendall(){
         sessions.forEach(a-> {
             try {
-                a.getRemote().sendString("broadcast");
+                a.getRemote().sendString("Получен новый запрос! проверьте таблицу");
             } catch (IOException e) {
                 e.printStackTrace();
             }

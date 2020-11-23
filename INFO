@@ -3,3 +3,5 @@ JS => https://habr.com/ru/company/piter/blog/426709/
 Users.Users    (name ; pass) (string;string)
 Requests.test  (id; json)  (int; jsonb)
 insert into test values(1, '{"sender":"pablo","body":"they are on to us"}');
+requests::   CREATE TABLE requests(ID varchar(50), DATETIMEREQUEST TIMESTAMP WITH TIME ZONE, INITIALDATA jsonb, DATETIMEUPDATE TIMESTAMP WITH TIME ZONE, UPDATEDDATA jsonb, DATETIMEAPPROVE TIMESTAMP WITH TIME ZONE);
+
