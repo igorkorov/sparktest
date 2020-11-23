@@ -4,9 +4,9 @@ import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
 
-@WebSocket
-public class EchoWebSocket {
 
+@WebSocket(maxIdleTime=50000000)
+public class EchoWebSocket {
     // Store sessions if you want to, for example, broadcast a message to all users
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<>();
 
@@ -24,6 +24,16 @@ public class EchoWebSocket {
     public void message(Session session, String message) throws IOException {
         System.out.println("Got: " + message);   // Print message
         session.getRemote().sendString(message); // and send it back
+    }
+
+    public static  void sendall(){
+        sessions.forEach(a-> {
+            try {
+                a.getRemote().sendString("broadcast");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 }

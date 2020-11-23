@@ -1,5 +1,5 @@
 JS => https://medium.com/@pearlmcphee/build-a-dynamic-app-using-javascript-html-and-css-f0dfc136007a
-
+JS => https://habr.com/ru/company/piter/blog/426709/
 Users.Users    (name ; pass) (string;string)
 Requests.test  (id; json)  (int; jsonb)
 insert into test values(1, '{"sender":"pablo","body":"they are on to us"}');

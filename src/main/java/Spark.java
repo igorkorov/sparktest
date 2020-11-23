@@ -1,3 +1,4 @@
+import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 import org.jetbrains.annotations.NotNull;
 import spark.ModelAndView;
 import spark.Request;
@@ -7,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import static spark.Spark.*;
+
 public class Spark {
     public static Map map_ = new HashMap<>();
     public static VelocityTemplateEngine eng =  new VelocityTemplateEngine();
@@ -61,6 +63,11 @@ public class Spark {
             attr.forEach(a -> {System.out.println(a);});
             if (attr.isEmpty())
                 req.session().attribute("logined", false);
+            return eng.render(OK);
+        });
+
+        get("/send", (req, res) ->{
+            EchoWebSocket.sendall();
             return eng.render(OK);
         });
 
