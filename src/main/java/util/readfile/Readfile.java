@@ -29,6 +29,18 @@ public class Readfile {
         }
         return result;
     }
+    public String readField(String field){
+        FileInputStream fprop;
+        Properties property = new Properties();
+        try {
+            fprop = new FileInputStream(filename);
+            property.load(fprop);
+            return property.getProperty(field);
+        } catch (IOException e) {
+            System.err.println("ОШИБКА: Файл свойств отсуствует!");
+            return null;
+        }
+    }
 
     public String AktorPORT(){
         FileInputStream fprop;

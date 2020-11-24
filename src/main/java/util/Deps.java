@@ -13,11 +13,16 @@ public class Deps {
     public ServerAktor aktor;
     public InputRequestProcessor irp;
     public String fileprops = "setts.ini";
-    private Readfile readfile;
+    public String incomingFolder = "requests";
+    private Readfile Settings;
+    private Readfile Incomming;
+
     public Class<EchoWebSocket> echoWebSocket;
+    public OutputResponceProcessor orp;
 
     public Deps() throws InterruptedException, SQLException {
-        readfile = new Readfile(fileprops);
+        Settings = new Readfile(fileprops);
+        Incomming = new Readfile(incomingFolder);
         try {
             this.loginchecker = new LoginChecker( new DataBaseHelper().executor);
         } catch (SQLException throwables) {
@@ -28,12 +33,16 @@ public class Deps {
         this.cypher = new CypherImpl();
         aktor = new ServerAktor();
         aktor.irp=irp;
-        aktor.setAddress(readfile.AktorPORT());
+        aktor.incomingFolder = incomingFolder;
+        aktor.setAddress(Settings.AktorPORT());
         aktor.echoWebSocket = echoWebSocket;
 
         aktor.setCypher(cypher);
         System.out.println("\n\n\n*************************\n****Spawning JAKtor******\n*************************\n\n\n\n");
         aktor.spawn();
+        orp = new OutputResponceProcessor();
+        orp.Incomming = Incomming;
+        orp.jaktor=aktor;
     }
 
 

@@ -5,3 +5,6 @@ Requests.test  (id; json)  (int; jsonb)
 insert into test values(1, '{"sender":"pablo","body":"they are on to us"}');
 requests::   CREATE TABLE requests(ID varchar(50), DATETIMEREQUEST TIMESTAMP WITH TIME ZONE, INITIALDATA jsonb, DATETIMEUPDATE TIMESTAMP WITH TIME ZONE, UPDATEDDATA jsonb, DATETIMEAPPROVE TIMESTAMP WITH TIME ZONE);
 
+update sintax : update requests set updateddata = '{"roman":"user"}' where id = '555';
+UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT
+  WHERE city = 'San Francisco' AND date = '2003-07-03';

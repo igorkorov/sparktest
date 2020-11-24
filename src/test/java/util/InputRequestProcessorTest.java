@@ -17,7 +17,7 @@ public class InputRequestProcessorTest {
     @Test
     public void saveRequestinDB() throws SQLException {
         RequestMessage req = new RequestMessage("555" , "must done", "{\"name\": \"roman\"}");
-        irp.saveRequestinDB(req);
+    //    irp.saveRequestinDB(req);
         ArrayList reqs = irp.loadrequests();
         assertNotEquals(0, reqs.size());
 
@@ -31,6 +31,15 @@ public class InputRequestProcessorTest {
     }
 
     @Test
-    public void testSaveRequestinDB() {
+    public void testSaveRequestinDB() throws SQLException {
+        assertNotEquals(null, irp.DumpRequestToHTMLTable());
+        System.out.println(irp.DumpRequestToHTMLTable());
     }
+
+    @Test
+    public void saveUpdatingRequestinDB() throws SQLException {
+        RequestMessage req = new RequestMessage("555" , "must done", "{\"name\": \"roland\"}");
+        //    irp.saveRequestinDB(req);
+        irp.saveUpdatingRequestinDB(req);
+        irp.loadrequests();    }
 }

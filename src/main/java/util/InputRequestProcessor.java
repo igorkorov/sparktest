@@ -14,6 +14,14 @@ public class InputRequestProcessor {
     public InputRequestProcessor(Executor executor){
         this.executor = executor;
     }
+    public void saveUpdatingRequestinDB(RequestMessage req) throws SQLException {
+        PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET updateddata = ?::jsonb WHERE id = ?");
+        stmt.setString(1, req.JSONed);
+        stmt.setString(2,  req.ID);
+        System.out.println("executing >>>"+ req.ID);
+        stmt.executeUpdate();
+    }
+
     public void saveRequestinDB(RequestMessage req) throws SQLException {
         PreparedStatement stmt = executor.getConn().prepareStatement("INSERT INTO requests  VALUES (?, ?, ?::jsonb, NULL, NULL, NULL)");
         stmt.setString(1, req.ID);
@@ -29,11 +37,36 @@ public class InputRequestProcessor {
         ResultSet res = executor.submit("select * from requests order by DATETIMEREQUEST desc;");
         ArrayList result = new ArrayList();
         while (res.next()){
-            result .add(res.getObject(2));
-            System.out.println(res.getObject(2));
+            for (int i =1; i<6; i++)
+          //  result .add(res.getObject(4));
+            {
+                System.out.print(res.getObject(i)+"  ;  ");
+                result.add(res.getObject(i));
+
+            }
+
+            System.out.println("  ;  ");
         }
         return result;
     };
+
+    public ResultSet loadrequestsSet() throws SQLException {
+        return executor.submit("select * from requests order by DATETIMEREQUEST desc;");
+    };
+
+
+    public String DumpRequestToHTMLTable() throws SQLException {
+        ArrayList data = loadrequests();
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<data.size(); i++){
+            if (i%6==0)
+                sb.append("<tr>");
+            sb.append("<td>"+data.get(i)+"</td>");
+           // if (i%5==0)
+           //     sb.append("</td>");
+        };
+        return sb.toString();
+    }
 
 
 }

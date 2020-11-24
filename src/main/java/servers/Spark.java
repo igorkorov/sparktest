@@ -7,6 +7,7 @@ import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
 import util.Deps;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,11 +20,36 @@ public class Spark {
     public static ModelAndView OK = new ModelAndView(map_, "OK.html");
     public static ModelAndView BAD = new ModelAndView(map_, "Bad.html");
     public static ModelAndView SOCKET = new ModelAndView(map_, "websocket.html");
+
     public static Map<String, Object> model = new HashMap<>();
+
+
+
+
+
     public static void main(String[] args) throws InterruptedException, SQLException {
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
         webSocket("/echo", EchoWebSocket.class);
+        get("requests", (req, res) -> {
+             ResultSet resultSet = deps.irp.loadrequestsSet();
+             StringBuilder sb = new StringBuilder();
+             while (resultSet.next()){
+                 sb.append("<tr>");
+                 for (int t=1; t<=6; t++){
+                     sb.append("<td>");
+                     sb.append(resultSet.getString(t));
+                     sb.append("</td>");
+                 }
+                 sb.append("</tr>");
+             }
+             model.clear();
+             model.put("requests", sb.toString());
+             System.out.println(sb.toString());
+             return new VelocityTemplateEngine().render(
+             new ModelAndView(model, "requests.html"));
+        }
+        );
 
         get("websocket", (req, res) -> eng.render(SOCKET));
 
@@ -44,6 +70,16 @@ public class Spark {
             if (check(req))
                 return eng.render(OK);
             return eng.render(BAD);
+        });
+        get("/approve", (req,res)->{
+            if (check(req)){
+                String id = req.queryParams("id");
+                deps.orp.approve(id);
+                return eng.render(OK);
+            }
+            return eng.render(BAD);
+
+
         });
         get("/login", (req, res) -> {
             String login = req.queryParams("login");
@@ -90,5 +126,78 @@ public class Spark {
     public static void flushsession(@NotNull Request req){
         req.session().attribute("logined", false);
     }
+
+
+
+
+
+    public static String generatedHTML(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("<!DOCTYPE html>\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "    <meta charset=\"utf-8\">\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<!-- форма для отправки сообщений -->\n" +
+                "<form name=\"publish\">\n" +
+                "    <input type=\"text\" name=\"message\"/>\n" +
+                "    <input type=\"submit\" value=\"Отправить\"/>\n" +
+                "</form>\n" +
+                "<script>\n" +
+                "if (!window.WebSocket) {\n" +
+                "\tdocument.body.innerHTML = 'WebSocket в этом браузере не поддерживается.';\n" +
+                "}\n" +
+                "\n" +
+                "// создать подключение\n" +
+                "var socket = new WebSocket(\"ws://localhost:4567/echo\");\n" +
+                "\n" +
+                "// отправить сообщение из формы publish\n" +
+                "document.forms.publish.onsubmit = function() {\n" +
+                "  var outgoingMessage = this.message.value;\n" +
+                "  socket.send(outgoingMessage);\n" +
+                "  return false;\n" +
+                "};\n" +
+                "\n" +
+                "// обработчик входящих сообщений\n" +
+                "socket.onmessage = function(event) {\n" +
+                "  var incomingMessage = event.data;\n" +
+                "  showMessage(incomingMessage);\n" +
+                "  addscript(incomingMessage);\n" +
+                "\n" +
+                "};\n" +
+                "\n" +
+                "// показать сообщение в div#subscribe\n" +
+                "function showMessage(message) {\n" +
+                "  var messageElem = document.createElement('div');\n" +
+                "  messageElem.appendChild(document.createTextNode(message));\n" +
+                "  document.getElementById('subscribe').appendChild(messageElem);\n" +
+                "}\n" +
+                "\n" +
+                "function addscript(scripted){\n" +
+                "var script = document.createElement('script');\n" +
+                "script.onload = function () {\n" +
+                "   alert('dynamical loaded');\n" +
+                "\n" +
+                "};\n" +
+                "script.src = alert(scripted);;;\n" +
+                "\n" +
+                "document.head.appendChild(script);\n" +
+                "}\n" +
+                "\n" +
+                "\n" +
+                "\n" +
+                "</script>\n" +
+                "\n" +
+                "<!-- здесь будут появляться входящие сообщения -->\n" +
+                "<div id=\"subscribe\"></div>\n" +
+                "\n" +
+                "<script src=\"browser.js\"></script>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>");
+        return sb.toString();
+    };
 
 }
