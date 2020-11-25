@@ -23,33 +23,25 @@ public class Spark {
 
     public static Map<String, Object> model = new HashMap<>();
 
-
-
-
-
     public static void main(String[] args) throws InterruptedException, SQLException {
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
         webSocket("/echo", EchoWebSocket.class);
+        get("requests8", (req, res) -> {
+            model.clear();
+            model.put("requests", deps.irp.DumpRequestToHTMLTable8());
+            System.out.println(deps.irp.DumpRequestToHTMLTable8());
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "requests.html"));
+        });
+
         get("requests", (req, res) -> {
-             ResultSet resultSet = deps.irp.loadrequestsSet();
-             StringBuilder sb = new StringBuilder();
-             while (resultSet.next()){
-                 sb.append("<tr>");
-                 for (int t=1; t<=6; t++){
-                     sb.append("<td>");
-                     sb.append(resultSet.getString(t));
-                     sb.append("</td>");
-                 }
-                 sb.append("</tr>");
-             }
-             model.clear();
-             model.put("requests", sb.toString());
-             System.out.println(sb.toString());
-             return new VelocityTemplateEngine().render(
-             new ModelAndView(model, "requests.html"));
-        }
-        );
+            model.clear();
+            model.put("requests", deps.irp.DumpRequestToHTMLTable8());
+            System.out.println(deps.irp.DumpRequestToHTMLTable8());
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "requests.html"));
+        });
 
         get("websocket", (req, res) -> eng.render(SOCKET));
 
@@ -75,24 +67,21 @@ public class Spark {
             if (check(req)){
                 String id = req.queryParams("id");
                 deps.orp.approve(id);
-                return eng.render(OK);
+                res.redirect("/requests");
+                //return eng.render(OK);
             }
             return eng.render(BAD);
-
-
         });
         get("/login", (req, res) -> {
             String login = req.queryParams("login");
             String pass = req.queryParams("password");
             if (deps.loginchecker.checklogin(login, pass)) {
                 req.session().attribute("logined", true);
-                req.session().attribute("user", login);
                 model.clear();
-                model.put("user", login);
-                model.put("id", req.session().id());
+                model.put("requests", deps.irp.DumpRequestToHTMLTable8());
+                System.out.println(deps.irp.DumpRequestToHTMLTable8());
                 return new VelocityTemplateEngine().render(
-                        new ModelAndView(model, "welcome.html")
-                );
+                        new ModelAndView(model, "requests.html"));
             }
             else
                 req.session().attribute("logined", false);
@@ -110,6 +99,34 @@ public class Spark {
         get("/send", (req, res) ->{
             EchoWebSocket.sendall();
             return eng.render(OK);
+        });
+
+
+
+
+
+        get("oldrequests", (req, res) -> {
+            ResultSet resultSet = deps.irp.loadrequestsSet();
+            StringBuilder sb = new StringBuilder();
+            while (resultSet.next()) {
+                sb.append("<tr>");
+                String comment = resultSet.getString(7);
+                System.out.println("comment>>>\n\n"+comment);
+                for (int t = 1; t <= 6; t++) {
+                    sb.append("<td>");
+                    if (t == 3) {
+                        sb.append("\"" + comment + "\"");
+                        sb.append(resultSet.getString(t));
+                        sb.append("</td>");
+                    }
+                    sb.append("</tr>");
+                }
+            }
+            model.clear();
+            model.put("requests", sb.toString());
+            System.out.println(sb.toString());
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "requests.html"));
         });
 
 

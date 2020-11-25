@@ -16,20 +16,25 @@ public class Deps {
     public String incomingFolder = "requests";
     private Readfile Settings;
     private Readfile Incomming;
-
+    public IDHelper idh;
     public Class<EchoWebSocket> echoWebSocket;
     public OutputResponceProcessor orp;
+    public DataBaseHelper requests;
+    public DataBaseHelper users;
 
     public Deps() throws InterruptedException, SQLException {
+        requests = new DataBaseHelper("requests");
+        users = new DataBaseHelper();
         Settings = new Readfile(fileprops);
         Incomming = new Readfile(incomingFolder);
         try {
-            this.loginchecker = new LoginChecker( new DataBaseHelper().executor);
+            this.loginchecker = new LoginChecker( users.executor);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        irp = new InputRequestProcessor(new DataBaseHelper("requests").executor);
+        idh = new IDHelper(requests.executor);
+        irp = new InputRequestProcessor(requests.executor);
         this.cypher = new CypherImpl();
         aktor = new ServerAktor();
         aktor.irp=irp;
@@ -43,6 +48,8 @@ public class Deps {
         orp = new OutputResponceProcessor();
         orp.Incomming = Incomming;
         orp.jaktor=aktor;
+        orp.idHelper=idh;
+        orp.executor=requests.executor;
     }
 
 

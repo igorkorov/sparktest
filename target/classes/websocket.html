@@ -17,7 +17,7 @@ if (!window.WebSocket) {
 
 // создать подключение
 var socket = new WebSocket("ws://localhost:4567/echo");
-
+alert('start socket');
 // отправить сообщение из формы publish
 document.forms.publish.onsubmit = function() {
   var outgoingMessage = this.message.value;
@@ -58,7 +58,7 @@ document.head.appendChild(script);
 <!-- здесь будут появляться входящие сообщения -->
 <div id="subscribe"></div>
 
-<script src="browser.js"></script>
+
 
 </body>
 </html>

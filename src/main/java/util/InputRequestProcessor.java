@@ -6,6 +6,7 @@ import fr.roland.DB.Executor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -23,18 +24,21 @@ public class InputRequestProcessor {
     }
 
     public void saveRequestinDB(RequestMessage req) throws SQLException {
-        PreparedStatement stmt = executor.getConn().prepareStatement("INSERT INTO requests  VALUES (?, ?, ?::jsonb, NULL, NULL, NULL)");
+        PreparedStatement stmt = executor.getConn().prepareStatement("INSERT INTO requests  VALUES (?, ?, ?::jsonb, NULL, NULL, NULL, ?)");
         stmt.setString(1, req.ID);
-        stmt.setDate(2,  new java.sql.Date(new Date().getTime()));
+        stmt.setTimestamp(2, new Timestamp(new Date().getTime()));///new java.sql.Date(new Date().getTime().n));
+        long now = new Date().getTime();
+        System.out.println();
+        Date date = new java.sql.Date(now);
+        System.out.println("Date = "+date.toString());
         stmt.setString(3, req.JSONed);
+        stmt.setString(4, req.Description);
         System.out.println("executing");
         stmt.executeUpdate();
-
-
     }
 
     public ArrayList<Object> loadrequests() throws SQLException {
-        ResultSet res = executor.submit("select * from requests order by DATETIMEREQUEST desc;");
+        ResultSet res = executor.submit("select * from requests order by DATETIMEREQUEST asc;");
         ArrayList result = new ArrayList();
         while (res.next()){
             for (int i =1; i<6; i++)
@@ -50,8 +54,24 @@ public class InputRequestProcessor {
         return result;
     };
 
+    public ArrayList<Object> loadrequests8() throws SQLException {
+        ResultSet res = executor.submit("select * from requests order by counter desc");
+        ArrayList result = new ArrayList();
+        while (res.next()){
+            result.add(res.getObject(8));
+            result.add(res.getObject(2));
+            result.add(res.getObject(3));
+            result.add(res.getObject(4));
+            result.add(res.getObject(5));
+            result.add(res.getObject(6));
+            result.add(res.getObject(7));
+        }
+        return result;
+    };
+
+
     public ResultSet loadrequestsSet() throws SQLException {
-        return executor.submit("select * from requests order by DATETIMEREQUEST desc;");
+        return executor.submit("select * from requests order by counter desc;");
     };
 
 
@@ -64,6 +84,19 @@ public class InputRequestProcessor {
             sb.append("<td>"+data.get(i)+"</td>");
            // if (i%5==0)
            //     sb.append("</td>");
+        };
+        return sb.toString();
+    }
+
+    public String DumpRequestToHTMLTable8() throws SQLException {
+        ArrayList data = loadrequests8();
+        StringBuilder sb = new StringBuilder();
+        for (int i=0; i<data.size(); i++){
+            if (i%7==0)
+                sb.append("<tr>");
+            sb.append("<td>"+data.get(i)+"</td>");
+            // if (i%5==0)
+            //     sb.append("</td>");
         };
         return sb.toString();
     }
