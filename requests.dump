@@ -1,0 +1,207 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.14 (Ubuntu 10.14-0ubuntu0.18.04.1)
+-- Dumped by pg_dump version 10.14 (Ubuntu 10.14-0ubuntu0.18.04.1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: requests; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.requests (
+    id character varying(50),
+    datetimerequest timestamp with time zone,
+    initialdata jsonb,
+    datetimeupdate timestamp with time zone,
+    updateddata jsonb,
+    datetimeapprove timestamp with time zone,
+    comment character varying(500),
+    counter integer NOT NULL
+);
+
+
+ALTER TABLE public.requests OWNER TO postgres;
+
+--
+-- Name: requests_counter_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.requests_counter_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.requests_counter_seq OWNER TO postgres;
+
+--
+-- Name: requests_counter_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.requests_counter_seq OWNED BY public.requests.counter;
+
+
+--
+-- Name: test; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.test (
+    id integer,
+    json jsonb
+);
+
+
+ALTER TABLE public.test OWNER TO postgres;
+
+--
+-- Name: test2; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.test2 (
+    id integer,
+    json json
+);
+
+
+ALTER TABLE public.test2 OWNER TO postgres;
+
+--
+-- Name: requests counter; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.requests ALTER COLUMN counter SET DEFAULT nextval('public.requests_counter_seq'::regclass);
+
+
+--
+-- Data for Name: requests; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.requests (id, datetimerequest, initialdata, datetimeupdate, updateddata, datetimeapprove, comment, counter) FROM stdin;
+2020-11-0216:09:55татарников	2020-11-23 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Waybill_number": "6"}	\N	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	\N	2
+2020-11-0216:09:55татарников	2020-11-23 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Waybill_number": "6"}	\N	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	\N	3
+555	2020-11-23 00:00:00+04	{"name": "roman"}	\N	{"name": "roland"}	\N	\N	6
+555	2020-11-23 00:00:00+04	{"name": "roman"}	\N	{"name": "roland"}	\N	\N	9
+555	2020-11-23 00:00:00+04	{"name": "roman"}	\N	{"name": "roland"}	\N	\N	10
+555	\N	\N	\N	{"name": "roland"}	\N	\N	11
+2020-11-0216:09:55татарников	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	\N	14
+2020-11-0213:43:42татьяна	2020-11-23 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "13:43:42", "Netto": "293.53", "Trash": "1.0", "Brutto": "296.0", "Metall": "Медь микс", "Comment": "татьяна", "Clogging": "0.5", "Complete": "Да", "Waybill_number": "5"}	\N	\N	2020-11-25 14:57:46.137+04	\N	1
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	12
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	4
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	21
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	22
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	23
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	24
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	25
+2020-11-0216:09:55татарников	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	\N	\N	cxbxcbcbxcbvcxbvcxbxcbvvcvbcxvbxcbc	30
+2020-11-0216:09:55татарников	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "16:09:55", "Netto": "20.00", "Trash": "0.2", "Brutto": "20.2", "Metall": "АКБ ГЕЛЬ", "Comment": "татарников", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "6"}	\N	\N	\N		31
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	16
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	17
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	18
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	19
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	20
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	26
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	27
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	32
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	33
+2020-11-0316:18:04витек	2020-11-25 13:39:35.729+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "16:18:04", "Netto": "37.24", "Trash": "52.5", "Brutto": "90.5", "Metall": "Банка", "Comment": "витек", "Clogging": "2.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "15"}	\N	\N	2020-11-25 15:20:54.866+04	88888888888888888888888888	49
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	7
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	8
+2020-11-0516:48:15рахманов	2020-11-25 00:00:00+04	{"Date": "2020-11-05", "Mode": "Приемка", "Tara": "0.0", "Time": "16:48:15", "Netto": "28.35", "Trash": "0.2", "Brutto": "31.7", "Metall": "5А", "Comment": "рахманов", "Clogging": "10.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "12"}	\N	\N	2020-11-25 14:53:58.713+04	Привет	48
+2020-11-0517:13:28ахатова	2020-11-25 00:00:00+04	{"Date": "2020-11-05", "Mode": "Приемка", "Tara": "0.0", "Time": "17:13:28", "Netto": "0.54", "Trash": "0.0", "Brutto": "0.6", "Metall": "5А", "Comment": "ахатова", "Clogging": "10.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "14"}	\N	\N	2020-11-25 14:54:08.863+04		47
+2020-11-0213:43:42татьяна	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "13:43:42", "Netto": "293.53", "Trash": "1.0", "Brutto": "296.0", "Metall": "Медь микс", "Comment": "татьяна", "Clogging": "0.5", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "5"}	\N	\N	2020-11-25 14:57:46.137+04		45
+2020-11-0213:43:42татьяна	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "13:43:42", "Netto": "293.53", "Trash": "1.0", "Brutto": "296.0", "Metall": "Медь микс", "Comment": "татьяна", "Clogging": "0.5", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "5"}	\N	\N	2020-11-25 14:57:46.137+04	fbfbbbvnvnbvnvnbvnbbvnbvbnv	46
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	15
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	13
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	29
+2020-11-0210:16:21сибирев	2020-11-24 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	39
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	40
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	41
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	42
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	43
+2020-11-0210:16:21сибирев	2020-11-25 00:00:00+04	{"Date": "2020-11-02", "Mode": "Приемка", "Tara": "0.0", "Time": "10:16:21", "Netto": "114.00", "Trash": "1.5", "Brutto": "115.5", "Metall": "АКБ ПП залитые", "Comment": "сибирев", "Clogging": "0.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "1"}	\N	\N	2020-11-25 15:09:48.52+04	\N	44
+2020-11-0310:56:50сушкмвич	2020-11-25 15:20:00.341+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	vxdxcvzcvxcvzxzvxcvzcv	50
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	5
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	34
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	35
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	28
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	36
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	37
+2020-11-0310:56:50сушкмвич	2020-11-24 00:00:00+04	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Алюминий хлам", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	{"Date": "2020-11-03", "Mode": "Приемка", "Tara": "0.0", "Time": "10:56:50", "Netto": "6.75", "Trash": "0.0", "Brutto": "13.5", "Metall": "Бронза", "Comment": "сушкмвич", "Clogging": "50.0", "Complete": "Да", "Condition": "Выгружен", "Waybill_number": "2"}	\N	\N	38
+\.
+
+
+--
+-- Data for Name: test; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.test (id, json) FROM stdin;
+1	{"body": "they are on to us", "sender": "pablo"}
+2	{"body": "they are on to us", "sender": "pablo"}
+3	{"body": "they are on to us", "sender": "pablo"}
+4	{"body": "they are on to us", "sender": "pablo"}
+5	{"body": "they are on to us", "sender": "pablo"}
+6	{"body": "they are on to us", "sender": "pablo"}
+7	{"body": "they are on to us", "sender": "pablo"}
+8	{"body": "they are on to us", "sender": "pablo"}
+9	{"body": "they are on to us", "sender": "pablo"}
+10	{"body": "they are on to us", "sender": "pablo"}
+11	{"body": "they are on to us", "sender": "pablo"}
+12	{"body": "they are on to us", "sender": "pablo"}
+13	{"body": "they are on to us", "sender": "pablo"}
+\.
+
+
+--
+-- Data for Name: test2; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.test2 (id, json) FROM stdin;
+1	{"sender":"pablo","body":"they are on to us"}
+1	{"sender":"pablo","body":"they are on to us"}
+\.
+
+
+--
+-- Name: requests_counter_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.requests_counter_seq', 50, true);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
