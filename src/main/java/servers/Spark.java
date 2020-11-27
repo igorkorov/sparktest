@@ -1,7 +1,6 @@
 package servers;
 
 import org.jetbrains.annotations.NotNull;
-import servers.EchoWebSocket;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -101,10 +100,6 @@ public class Spark {
             return eng.render(OK);
         });
 
-
-
-
-
         get("oldrequests", (req, res) -> {
             ResultSet resultSet = deps.irp.loadrequestsSet();
             StringBuilder sb = new StringBuilder();
@@ -143,10 +138,6 @@ public class Spark {
     public static void flushsession(@NotNull Request req){
         req.session().attribute("logined", false);
     }
-
-
-
-
 
     public static String generatedHTML(){
         StringBuilder sb = new StringBuilder();
