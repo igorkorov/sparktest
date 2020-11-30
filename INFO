@@ -11,3 +11,8 @@ UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT
 
   ALTER TABLE requests ADD COLUMN comment varchar(500) ;
   ALTER TABLE requests ADD COLUMN counter serial;
+
+
+INSTALL NODEJS 10 => https://joshtronic.com/2018/05/08/how-to-install-nodejs-10-on-ubuntu-1804-lts/
+Tutorial => https://medium.com/hackernoon/react-app-from-scratch-d694300d1631
+Babel => https://metanit.com/web/react/1.2.php

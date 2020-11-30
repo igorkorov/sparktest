@@ -4,20 +4,20 @@
     <meta charset="utf-8">
 </head>
 <body>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.25.0/babel.min.js"></script>
 <!-- форма для отправки сообщений -->
 <form name="publish">
     <input type="text" name="message"/>
     <input type="submit" value="Отправить"/>
 </form>
-<script>
+<script  type="text/babel">
 if (!window.WebSocket) {
 	document.body.innerHTML = 'WebSocket в этом браузере не поддерживается.';
 }
 
 // создать подключение
 var socket = new WebSocket("ws://localhost:4567/echo");
-alert('start socket');
+alert('start socket with babel');
 // отправить сообщение из формы publish
 document.forms.publish.onsubmit = function() {
   var outgoingMessage = this.message.value;
