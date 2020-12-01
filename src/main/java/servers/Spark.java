@@ -33,6 +33,11 @@ public class Spark {
                     new ModelAndView(model, "react.html"));
         });
 
+        get("getriot", (req, res)->{
+            String login = req.queryParams("value");
+            return login;
+        });
+
         get("riot", (req, res) -> {
             model.clear();
             return new VelocityTemplateEngine().render(
