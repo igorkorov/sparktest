@@ -2,14 +2,27 @@
 <html>
 <head>
     <script src = "/riotjs/riot.min.js"></script>
-    <script src = "https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/riot@3.13/riot+compiler.min.js"></script>
 </head>
 <body>
+<customTag color="red"></customTag>
+<custom></custom>
+
+<!-- inlined tag definition -->
+<script src="tags/custom.tag" type="riot/tag"></script>
+<script src="tags/customTag.tag" type="riot/tag"></script>
+
 <messageTag></messageTag>
+<myTag></myTag>
     <script>
-         var tagHtml = "<h1>Hello World!</h1>";
+         var tagHtml = "<h1>Hello World2!</h1>";
+
+         var mytag = "<div><h1>Das ist meine TAG<messageTag></messageTag><messageTag></messageTag></h1></div>";
+         riot.tag("mytag", mytag);
+
+
          riot.tag("messageTag", tagHtml);
-         riot.mount("messageTag");
+         riot.mount('*');
       </script>
 </body>
 </html>

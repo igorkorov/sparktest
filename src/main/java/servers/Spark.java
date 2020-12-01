@@ -23,6 +23,7 @@ public class Spark {
     public static Map<String, Object> model = new HashMap<>();
 
     public static void main(String[] args) throws InterruptedException, SQLException {
+        staticFiles.location("/public");
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
         webSocket("/echo", EchoWebSocket.class);
@@ -36,6 +37,12 @@ public class Spark {
             model.clear();
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "riot.html"));
+        });
+
+        get("riotsocket", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "riotsocket.html"));
         });
 
 
