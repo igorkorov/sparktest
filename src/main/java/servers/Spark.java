@@ -26,6 +26,19 @@ public class Spark {
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
         webSocket("/echo", EchoWebSocket.class);
+        get("react", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "react.html"));
+        });
+
+        get("riot", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "riot.html"));
+        });
+
+
         get("requests8", (req, res) -> {
             model.clear();
             model.put("requests", deps.irp.DumpRequestToHTMLTable8());
