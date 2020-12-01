@@ -16,3 +16,5 @@ UPDATE weather SET temp_lo = temp_lo+1, temp_hi = temp_lo+15, prcp = DEFAULT
 INSTALL NODEJS 10 => https://joshtronic.com/2018/05/08/how-to-install-nodejs-10-on-ubuntu-1804-lts/
 Tutorial => https://medium.com/hackernoon/react-app-from-scratch-d694300d1631
 Babel => https://metanit.com/web/react/1.2.php
+
+Riot => https://coderlessons.com/tutorials/veb-razrabotka/uznaite-riot-js/riot-js-kratkoe-rukovodstvo
