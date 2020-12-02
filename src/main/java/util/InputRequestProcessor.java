@@ -46,9 +46,7 @@ public class InputRequestProcessor {
             {
                 System.out.print(res.getObject(i)+"  ;  ");
                 result.add(res.getObject(i));
-
             }
-
             System.out.println("  ;  ");
         }
         return result;
@@ -58,13 +56,20 @@ public class InputRequestProcessor {
         ResultSet res = executor.submit("select * from requests order by counter desc");
         ArrayList result = new ArrayList();
         while (res.next()){
-            result.add(res.getObject(8));
+         /*   result.add(res.getObject(8));
             result.add(res.getObject(2));
             result.add(res.getObject(3));
             result.add(res.getObject(4));
             result.add(res.getObject(5));
             result.add(res.getObject(6));
+            result.add(res.getObject(7));  old order*/
+            result.add(res.getObject(8));
+            result.add(res.getObject(2));
             result.add(res.getObject(7));
+            result.add(res.getObject(3));
+            result.add(res.getObject(6));
+            result.add(res.getObject(5));
+            result.add(res.getObject(4));
         }
         return result;
     };
@@ -101,8 +106,6 @@ public class InputRequestProcessor {
                     sb.append("<tr>");
                 }
                 else sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
-
-
             }
             sb.append("<td>"+data.get(i)+"</td>");
             // if (i%5==0)

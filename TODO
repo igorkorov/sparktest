@@ -1,3 +1,13 @@
 Database structure:
 Table requests::
 ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Request updated (Changes) (JSON); Request completed(boolean: Int); Request approved(boolean : Int)
+
+
+    <th >ID</th>
+    <th >Дата запроса</th>
+    <th >Позиция</th>
+    <th >Дата изменения</th>
+    <th >Измененная позиция</th>
+    <th >Дата разрешения /запрешения</th>
+    <th >Комментарий</th>
+    <th> Одобрить запрос</th>
