@@ -1,0 +1,19 @@
+<html>
+<head>
+    <script src = "https://cdnjs.cloudflare.com/ajax/libs/riot/3.13.2/riot+compiler.min.js"></script>
+</head>
+<body>
+<custom10Tag></custom10Tag>
+<custom11Tag></custom11Tag>
+<script src = "tags/custom10Tag.tag" type = "riot/tag"></script>
+<script src = "tags/custom11Tag.tag" type = "riot/tag"></script>
+<script>
+         var EventBus = function(){
+            riot.observable(this);
+         }
+         riot.eventBus = new EventBus();
+         riot.mount("*");
+                  riot.mount("custom11Tagm", {start: 'startvalue333' })
+      </script>
+</body>
+</html>
