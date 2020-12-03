@@ -11,3 +11,7 @@ ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Re
     <th >Дата разрешения /запрешения</th>
     <th >Комментарий</th>
     <th> Одобрить запрос</th>
+
+
+    Data аттрибуты работа с riot;
+    Send json напрямую в тег

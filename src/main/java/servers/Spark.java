@@ -178,7 +178,8 @@ public class Spark {
         attr.forEach(a -> {System.out.println(a);});
         if (attr.isEmpty())
             req.session().attribute("logined", false);
-        if (req.session().attribute("logined").equals(true)) return true;
+        if (req.session().attribute("logined").equals(true))
+            return true;
         return false;
     }
 
