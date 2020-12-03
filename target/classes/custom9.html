@@ -8,23 +8,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </head>
 <body>
+<dinamic>
+</dinamic>
+<buttontag   base="eyJhIjogNiwgImZpcnN0X25hbWUiIDogIlNhbW15IiwgImxhc3RfbmFtZSIgOiAiU2hhcmsiLCAibG9jYXRpb24iIDogIk9jZWFuIn0K"></buttontag>
 <custom10Tag></custom10Tag>
 <custom11Tag></custom11Tag>
-<buttontag></buttontag>
+
 <nicetag number="20"></nicetag>
 <approvetag number="60"></approvetag>
+<script src = "tags/dinamic.tag" type = "riot/tag"></script>
 <script src = "tags/approvetag.tag" type = "riot/tag"></script>
 <script src = "tags/nicetag.tag" type = "riot/tag"></script>
 <script src = "tags/buttontag.tag" type = "riot/tag"></script>
 <script src = "tags/custom10Tag.tag" type = "riot/tag"></script>
 <script src = "tags/custom11Tag.tag" type = "riot/tag"></script>
 <script>
-         var EventBus = function(){
-            riot.observable(this);
-         }
-         riot.eventBus = new EventBus();
-         riot.mount("*");
-                  riot.mount("custom11Tagm", {start: 'startvalue333' })
-      </script>
+    var EventBus = function(){
+        riot.observable(this);
+    }
+    riot.eventBus = new EventBus();
+    riot.mount("*");
+    riot.mount("custom11Tagm", {start: 'startvalue333' })
+</script>
 </body>
 </html>

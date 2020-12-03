@@ -7,14 +7,24 @@
 </head>
 <body><h1>Test</h1>
 <script>
-const div = document.createElement('div')
-const h4 = document.createElement('h4')
-const a = document.createElement('a')
-const img = document.createElement('img')
-const body = document.querySelector('body');
-body.append(div)
-body.append(h4)
-h4.innerHTML = "Flat-Twist With Twist Out"
+    var initial = '{"a": 6, "first_name" : "Sammy", "last_name" : "Shark", "location" : "Ocean"}'
+    var base = 'eyJhIjogNiwgImZpcnN0X25hbWUiIDogIlNhbW15IiwgImxhc3RfbmFtZSIgOiAiU2hhcmsiLCAibG9jYXRpb24iIDogIk9jZWFuIn0K'
+    var value = window.atob(base)
+    alert(value)
+    var reparced = JSON.parse(value)
+    alert('last name   '+reparced.last_name)
+    var s = '{"first_name" : "Sammy", "last_name" : "Shark", "location" : "Ocean"}'
+    var obj = JSON.parse(s)
+    alert('firt name:' + obj.first_name)
+
+    const div = document.createElement('div')
+    const h4 = document.createElement('h4')
+    const a = document.createElement('a')
+    const img = document.createElement('img')
+    const body = document.querySelector('body');
+    body.append(div)
+    body.append(h4)
+    h4.innerHTML = "Flat-Twist With Twist Out"
 </script>
 </body>
 </html>
