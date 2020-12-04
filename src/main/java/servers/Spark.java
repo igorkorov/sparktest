@@ -26,6 +26,7 @@ public class Spark {
         staticFiles.location("/public");
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
+
         webSocket("/echo", EchoWebSocket.class);
         get("react", (req, res) -> {
             model.clear();

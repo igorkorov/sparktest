@@ -2,6 +2,8 @@ package servers;
 
 import org.eclipse.jetty.websocket.api.*;
 import org.eclipse.jetty.websocket.api.annotations.*;
+import util.Deps;
+
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.*;
@@ -11,7 +13,7 @@ import java.util.concurrent.*;
 public class EchoWebSocket {
     // Store sessions if you want to, for example, broadcast a message to all users
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<>();
-
+    public static Deps deps;
     @OnWebSocketConnect
     public void connected(Session session) {
         sessions.add(session);
@@ -26,6 +28,7 @@ public class EchoWebSocket {
     public void message(Session session, String message) throws IOException {
         System.out.println("Got: " + message);   // Print message
         session.getRemote().sendString(message); // and send it back
+
     }
 
     public static  void sendall(){
