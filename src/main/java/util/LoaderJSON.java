@@ -12,12 +12,12 @@ public class LoaderJSON {
         this.executor = executor;
     }
     public ArrayList<Object> loaderJSON() throws SQLException {
-      ResultSet res = executor.submit("select * from test;");
-      ArrayList result = new ArrayList();
-      while (res.next()){
-          result .add(res.getObject(2));
-      }
-      return result;
+        ResultSet res = executor.submit("select * from test;");
+        ArrayList result = new ArrayList();
+        while (res.next()){
+            result .add(res.getObject(2));
+        }
+        return result;
     };
 
 }

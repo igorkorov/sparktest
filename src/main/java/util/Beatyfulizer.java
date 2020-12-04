@@ -5,7 +5,6 @@ public class Beatyfulizer {
 
     };
     public String beatyfulizerJSON(String input){
-
         StringBuilder sb = new StringBuilder();
         input = input.replace("{", "");
         input = input.replace("\"","");
@@ -41,5 +40,18 @@ public class Beatyfulizer {
         }*/
         return sb.toString();
 
-    } ;
+    };
+
+    public String schoneJSON(ParcedJSON input){
+        StringBuilder result = new StringBuilder();
+        result.append("Время: "+ input.Time +   "<br>");
+        result.append("Номер накладной: "+ input.Waybill_number +    "<br>");
+        result.append("Металл: "+ input.Metall +    "<br>");
+        result.append("Тара: "+ input.Tara +    "<br>");
+        result.append("Нетто: "+ input.Netto +   "<br>");
+        result.append("Брутто: "+ input.Brutto +   "<br>");
+        result.append("Засор: "+ input.Clogging +   "<br>");
+        result.append("Примесь: "+ input.Trash +   "<br>");
+        return result.toString();
+    }
 }

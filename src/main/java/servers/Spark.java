@@ -33,6 +33,12 @@ public class Spark {
                     new ModelAndView(model, "react.html"));
         });
 
+        get("simple", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "simple.html"));
+        });
+
         get("genriot", (req, res) -> {
             model.clear();
             String components = "<my-component attr=\"142\"></my-component>\n" +
