@@ -2,6 +2,7 @@ package util;
 
 import abstractions.RequestMessage;
 import fr.roland.DB.Executor;
+import org.json.simple.parser.ParseException;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,6 +75,24 @@ public class InputRequestProcessor {
         return result;
     };
 
+    public ArrayList loadrequests8inmatrix() throws SQLException {
+        ResultSet res = executor.submit("select * from requests order by counter desc");
+        ArrayList result = new ArrayList();
+        while (res.next()){
+            ArrayList _result = new ArrayList();
+            _result.add(res.getObject(8));
+            _result.add(res.getObject(2));
+            _result.add(res.getObject(7));
+            _result.add(res.getObject(3));
+            _result.add(res.getObject(6));
+            _result.add(res.getObject(5));
+            _result.add(res.getObject(4));
+            result.add(_result);
+        }
+
+        return result;
+    };
+
 
     public ResultSet loadrequestsSet() throws SQLException {
         return executor.submit("select * from requests order by counter desc;");
@@ -105,9 +124,82 @@ public class InputRequestProcessor {
                     first =0;
                     sb.append("<tr>");
                 }
-                else sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+                else
+                    sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
             }
             sb.append("<td>"+data.get(i)+"</td>");
+
+        };
+        sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        return sb.toString();
+    }
+
+
+
+    public String DumpRequestToHTMLTable8usingmatrix() throws SQLException {
+        ArrayList<ArrayList> data = loadrequests8inmatrix();
+        System.out.println("SIZE::"+data.size());
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tr>");
+        int number_row=data.size();
+        for (int i=0; i<data.size(); i++){
+            for (int j=0; j<data.get(i).size(); j++)
+                sb.append("<td>"+data.get(i).get(j)+"</td>");
+            sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        };
+        sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        return sb.toString();
+    }
+
+    public String DumpRequestToHTMLTable8usingmatrixhardcoded() throws SQLException, ParseException {
+        ArrayList<ArrayList> data = loadrequests8inmatrix();
+        System.out.println("SIZE::"+data.size());
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tr>");
+        int number_row=data.size();
+        for (int i=0; i<data.size(); i++){
+            sb.append("<td>"+data.get(i).get(0)+"</td>");
+            sb.append("<td>"+data.get(i).get(1)+"</td>");
+            sb.append("<td>"+data.get(i).get(2)+"</td>");
+            sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(i).get(3))))+ "</td>");
+            sb.append("<td>"+data.get(i).get(4)+"</td>");
+            sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(i).get(5))))+ "</td>");
+            sb.append("<td>"+data.get(i).get(6)+"</td>");
+
+
+            sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        };
+        sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        return sb.toString();
+    }
+
+
+    public String DumpRequestToHTMLTable8new() throws SQLException, ParseException {
+        ArrayList data = loadrequests8();
+        System.out.println("SIZE::"+data.size());
+        StringBuilder sb = new StringBuilder();
+        int first = 1;
+        int number_row=data.size()/7;
+        for (int i=0; i<data.size(); i++){
+            System.out.println("i::>>"+i+"@data::"+data.get(i));
+            if (i%7==0) {
+                if ((first == 1) && (number_row!=1)){
+                    first =0;
+                    sb.append("<tr>");
+                }
+                else sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+
+            }
+            if ((i%3==0) || (i%5==0)) {
+                /////////////old        sb.append("<td>" + data.get(i) + "</td>");
+
+                String load = String.valueOf(data.get(i));
+                System.out.println("PARSING::"+load);
+                sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(load))+ "</td>");
+                continue;
+            }
+            sb.append("<td>"+data.get(i)+"</td>");
+
             // if (i%5==0)
             //     sb.append("</td>");
         };

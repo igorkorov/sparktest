@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -61,5 +62,16 @@ public class InputRequestProcessorTest {
        // Date date = new java.sql.Date(timeStamp);
        // System.out.println("Date = "+date.toString());
 
+    }
+
+    @Test
+    public void testSaveUpdatingRequestinDB() throws SQLException {
+        ArrayList<ArrayList> matrix = irp.loadrequests8inmatrix();
+        assertNotEquals(null, matrix);
+        for (int i=0; i<matrix.size(); i++){
+            for (int j=0; j<matrix.get(0).size(); j++){
+                System.out.println(matrix.get(i).get(j));
+            }
+        }
     }
 }

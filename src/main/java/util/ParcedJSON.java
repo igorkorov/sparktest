@@ -15,6 +15,8 @@ public class ParcedJSON {
     public String Clogging;
     public String Trash;
     public static ParcedJSON parse(String input) throws ParseException {
+        if (input.length()<5)
+            return null;
         Object obj = new JSONParser().parse(input);
         JSONObject jo = (JSONObject) obj;
 
@@ -27,6 +29,7 @@ public class ParcedJSON {
         pj.Netto = (String) jo.get("Netto");
         pj.Brutto = (String) jo.get("Brutto");
         pj.Clogging = (String) jo.get("Clogging");
+        pj.Trash = (String) jo.get("Trash");
         return pj;
     };
 

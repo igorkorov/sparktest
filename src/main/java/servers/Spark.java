@@ -130,8 +130,9 @@ public class Spark {
             if (deps.loginchecker.checklogin(login, pass)) {
                 req.session().attribute("logined", true);
                 model.clear();
-                model.put("requests", deps.irp.DumpRequestToHTMLTable8());
-                System.out.println(deps.irp.DumpRequestToHTMLTable8());
+            ///    model.put("requests", deps.irp.DumpRequestToHTMLTable8());
+            ///    System.out.println(deps.irp.DumpRequestToHTMLTable8());
+                model.put("requests", deps.irp.DumpRequestToHTMLTable8usingmatrixhardcoded());
                 return new VelocityTemplateEngine().render(
                         new ModelAndView(model, "requests.html"));
             }

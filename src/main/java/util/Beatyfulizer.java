@@ -42,7 +42,9 @@ public class Beatyfulizer {
 
     };
 
-    public String schoneJSON(ParcedJSON input){
+    public static String schoneJSON(ParcedJSON input){
+        if (input==null)
+            return "--";
         StringBuilder result = new StringBuilder();
         result.append("Время: "+ input.Time +   "<br>");
         result.append("Номер накладной: "+ input.Waybill_number +    "<br>");
