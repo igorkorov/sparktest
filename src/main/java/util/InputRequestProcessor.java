@@ -151,6 +151,16 @@ public class InputRequestProcessor {
         return sb.toString();
     }
 
+    public void processRow(StringBuilder sb, ArrayList data) throws ParseException {
+        sb.append("<td>"+data.get(0)+"</td>");
+        sb.append("<td>"+data.get(1)+"</td>");
+        sb.append("<td>"+data.get(2)+"</td>");
+        sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))))+ "</td>");
+        sb.append("<td>"+data.get(4)+"</td>");
+        sb.append("<td>"+Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))))+ "</td>");
+        sb.append("<td>"+data.get(6)+"</td>");
+    };
+
     public String DumpRequestToHTMLTable8usingmatrixhardcoded() throws SQLException, ParseException {
         ArrayList<ArrayList> data = loadrequests8inmatrix();
         System.out.println("SIZE::"+data.size());
@@ -158,15 +168,7 @@ public class InputRequestProcessor {
         sb.append("<tr>");
         int number_row=data.size();
         for (int i=0; i<data.size(); i++){
-            sb.append("<td>"+data.get(i).get(0)+"</td>");
-            sb.append("<td>"+data.get(i).get(1)+"</td>");
-            sb.append("<td>"+data.get(i).get(2)+"</td>");
-            sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(i).get(3))))+ "</td>");
-            sb.append("<td>"+data.get(i).get(4)+"</td>");
-            sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(i).get(5))))+ "</td>");
-            sb.append("<td>"+data.get(i).get(6)+"</td>");
-
-
+            processRow(sb, data.get(i));
             sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
         };
         sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
