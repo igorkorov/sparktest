@@ -33,7 +33,18 @@ public class Spark {
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "react.html"));
         });
+        get("ajax", (req,res)->{
+            model.clear();
+            String params = req.queryParams("params");
 
+            System.out.println("AJAX called get");
+            return "worked; param ="+params;
+        });
+        get("aj", (req,res)->{
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "ajax.html"));
+        });
         get("simple", (req, res) -> {
             model.clear();
             return new VelocityTemplateEngine().render(
