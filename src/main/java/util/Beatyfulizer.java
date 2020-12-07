@@ -9,8 +9,9 @@ public class Beatyfulizer {
 
     public static String compareundschoneJSON(ParcedJSON input, ParcedJSON compare){
         String styleinject = "  style=\"background-color: yellow;\"";
-        if ((input==null) || (compare==null))
+        if ((input==null) || (compare==null) )
             return schoneJSON(input);
+
         StringBuilder result = new StringBuilder();
         if ((input.Date ==null) || input.Date.equals(compare.Date))
             result.append("<p>Дата: "+ input.Date +   "<br>");

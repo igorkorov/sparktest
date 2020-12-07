@@ -136,6 +136,17 @@ public class Spark {
             }
             return eng.render(BAD);
         });
+
+
+        get("/decline", (req,res)->{
+            if (check(req)){
+                String id = req.queryParams("id");
+                deps.orp.decline(id);
+                res.redirect("/requests");
+                //return eng.render(OK);
+            }
+            return eng.render(BAD);
+        });
         get("/login", (req, res) -> {
             String login = req.queryParams("login");
             String pass = req.queryParams("password");

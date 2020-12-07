@@ -32,6 +32,22 @@ public class OutputResponceProcessor {
        stmt.setTimestamp(1, new Timestamp(new Date().getTime()));
        stmt.setString(2, ID);
        stmt.executeUpdate();
-   } ;
+   }
 
+    public void decline(String ID) throws SQLException, IOException {
+        System.out.println("ID=>>>"+ID);
+        ResponceMessage res = new ResponceMessage();
+        res.ID = idHelper.getIDusingsimpleID(ID);
+        res.approved = false;
+        jaktor.sendResponce(res);
+        updateDateDecline(res.ID);
+    };
+
+    public void updateDateDecline(String ID) throws SQLException {
+        PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET datetimeapprove = ? updateddata = '0',  WHERE id = ?");
+        stmt.setTimestamp(1, new Timestamp(new Date().getTime()));
+        stmt.setString(2, ID);
+        stmt.executeUpdate();
+
+    }
 }

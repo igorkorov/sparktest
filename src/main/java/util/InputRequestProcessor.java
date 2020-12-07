@@ -154,16 +154,25 @@ public class InputRequestProcessor {
 
     public Condition processRow(StringBuilder sb, ArrayList data) throws ParseException {
         boolean data_approve = true;
+        String savedJS = String.valueOf(data.get(5));
+        Condition result=Condition.SUSPENDING;
+        if (data.get(4)!=null){
+            if (savedJS.equals("0"))
+                result = Condition.DENIED;
+            else
+                result = Condition.APPROVED;
+
+        }
+        String savedJSON="";
         String initialJSON = Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))));
-        String savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
+        if (!result.equals(Condition.DENIED))
+            savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
         sb.append("<td  align=\"center\">"+data.get(0)+"</td>");
         sb.append("<td align=\"center\">"+data.get(1)+"</td>");
         sb.append("<td align=\"center\">"+data.get(2)+"</td>");
         sb.append("<td align=\"center\">"+initialJSON+ "</td>");
-        if (data.get(4)==null){
+        if (data.get(4)==null)
             sb.append("<td>"+"</td>");
-            data_approve=false;
-        }
         else
             sb.append("<td align=\"center\">"+data.get(4)+"</td>");
         sb.append("<td align=\"center\">"+savedJSON+ "</td>");
@@ -172,11 +181,7 @@ public class InputRequestProcessor {
         }
         else
             sb.append("<td align=\"center\">"+data.get(6)+"</td>");
-        if (savedJSON.equals("") && data_approve)
-            return Condition.APPROVED;
-        if (!savedJSON.equals("") && data_approve)
-            return Condition.DENIED;
-        return Condition.SUSPENDING;
+        return result;
 
     };
 
@@ -187,7 +192,6 @@ public class InputRequestProcessor {
         sb.append("<tr>");
         int number_row=data.size();
         for (int i=0; i<data.size(); i++){
-            System.out.print("#"+i);
             String result = String.valueOf(processRow(sb, data.get(i)));
             sb.append("<td><approvetag status=\""+result+"\"number=\""+(number_row--)+"\"></approvetag></td><tr>");
         };
