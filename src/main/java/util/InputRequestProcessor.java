@@ -1,5 +1,6 @@
 package util;
 
+import abstractions.Condition;
 import abstractions.RequestMessage;
 import fr.roland.DB.Executor;
 import org.json.simple.parser.ParseException;
@@ -151,14 +152,32 @@ public class InputRequestProcessor {
         return sb.toString();
     }
 
-    public void processRow(StringBuilder sb, ArrayList data) throws ParseException {
-        sb.append("<td>"+data.get(0)+"</td>");
-        sb.append("<td>"+data.get(1)+"</td>");
-        sb.append("<td>"+data.get(2)+"</td>");
-        sb.append("<td>"+Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))))+ "</td>");
-        sb.append("<td>"+data.get(4)+"</td>");
-        sb.append("<td>"+Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))))+ "</td>");
-        sb.append("<td>"+data.get(6)+"</td>");
+    public Condition processRow(StringBuilder sb, ArrayList data) throws ParseException {
+        boolean data_approve = true;
+        String initialJSON = Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))));
+        String savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
+        sb.append("<td  align=\"center\">"+data.get(0)+"</td>");
+        sb.append("<td align=\"center\">"+data.get(1)+"</td>");
+        sb.append("<td align=\"center\">"+data.get(2)+"</td>");
+        sb.append("<td align=\"center\">"+initialJSON+ "</td>");
+        if (data.get(4)==null){
+            sb.append("<td>"+"</td>");
+            data_approve=false;
+        }
+        else
+            sb.append("<td align=\"center\">"+data.get(4)+"</td>");
+        sb.append("<td align=\"center\">"+savedJSON+ "</td>");
+        if (data.get(6)==null){
+            sb.append("<td>"+"</td>");
+        }
+        else
+            sb.append("<td align=\"center\">"+data.get(6)+"</td>");
+        if (savedJSON.equals("") && data_approve)
+            return Condition.APPROVED;
+        if (!savedJSON.equals("") && data_approve)
+            return Condition.DENIED;
+        return Condition.SUSPENDING;
+
     };
 
     public String DumpRequestToHTMLTable8usingmatrixhardcoded() throws SQLException, ParseException {
@@ -168,10 +187,11 @@ public class InputRequestProcessor {
         sb.append("<tr>");
         int number_row=data.size();
         for (int i=0; i<data.size(); i++){
-            processRow(sb, data.get(i));
-            sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+            System.out.print("#"+i);
+            String result = String.valueOf(processRow(sb, data.get(i)));
+            sb.append("<td><approvetag status=\""+result+"\"number=\""+(number_row--)+"\"></approvetag></td><tr>");
         };
-        sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        //sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
         return sb.toString();
     }
 

@@ -101,7 +101,7 @@ public class Beatyfulizer {
 
     public static String schoneJSON(ParcedJSON input){
         if (input==null)
-            return "--";
+            return "";
         StringBuilder result = new StringBuilder();
         result.append("<p>Дата: "+ input.Date +   "<br>");
         result.append("<p>Время: "+ input.Time +   "<br>");
