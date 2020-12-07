@@ -39,6 +39,6 @@ public class Base64EncoderTest {
        String viaSitecp1251 = "eyJhIjogNiwgImZpcnN0X25hbWUiIDogIlNhbW15IiwgImxhc3RfbmFtZSIgOiAi5PDu5+Tu4iIsICJsb2NhdGlvbiIgOiAiT2NlYW4ifQ==";
        String viaJS = "eyJhIjogIjYiLCAiZmlyc3RfbmFtZSIgOiAiU2FtbXkiLCAibGFzdF9uYW1lIiA6ICLQtNGA0L7Qt9C00L7QsiIsICJsb2NhdGlvbiIgOiAiT2NlYW4ifQ==";
        assertEquals(viaBouncy, viaSite);
-       assertEquals(viaBouncy, viaSitecp1251);
+
     }
 }

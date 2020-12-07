@@ -6,14 +6,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class BeatyfulizerTest {
-    public  String  initialjson = "{\"user\":\"123\",\"metal\":\"alum\"}";
-    public String etalonhtml = "user:123<br>metal:alum<br>";
-    @Test
-    public void beatyfulizerJSON() {
-       Beatyfulizer bf = new Beatyfulizer();
-       assertEquals(etalonhtml, bf.beatyfulizerJSON(initialjson));
-    }
-
     @Test
     public void comperaJSON() throws ParseException {
         String first ="{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"10:56:50\", \"Netto\": \"6.75\", \"Trash\": \"0.0\", \"Brutto\": \"13.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"сушкмвич\", \"Clogging\": \"50.0\", \"Complete\": \"Да\", \"Waybill_number\": \"2\"}";
