@@ -37,6 +37,7 @@ public class OutputResponceProcessor {
     public void decline(String ID) throws SQLException, IOException {
         System.out.println("ID=>>>"+ID);
         ResponceMessage res = new ResponceMessage();
+
         res.ID = idHelper.getIDusingsimpleID(ID);
         res.approved = false;
         jaktor.sendResponce(res);
@@ -47,7 +48,7 @@ public class OutputResponceProcessor {
         System.out.println("\n\n\nSetting 0 vua"+ID+"request\n\n\n\n");
         PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET datetimeapprove = ?, updateddata = ?::jsonb  WHERE id = ?");
         stmt.setTimestamp(1, new Timestamp(new Date().getTime()));
-        stmt.setString(2, "{}");
+        stmt.setString(2, "{\"a\":\"0\"}");
         stmt.setString(3, ID);
         stmt.executeUpdate();
 

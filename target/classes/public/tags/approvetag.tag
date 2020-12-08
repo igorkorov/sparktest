@@ -63,7 +63,7 @@
             if (xhr.readyState != 4) return
             clearTimeout(xhrTimeout)
             if (xhr.status == 200) {
-                alert(xhr.responseText);
+                alert('ответ отправлен');
             }
         }
 
@@ -109,7 +109,7 @@
                     if (xhr.readyState != 4) return
                     clearTimeout(xhrTimeout)
                     if (xhr.status == 200) {
-                        alert(xhr.responseText);
+                        alert('ответ отправлен');
                     }
                 }
 

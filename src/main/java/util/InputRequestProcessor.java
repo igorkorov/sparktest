@@ -18,9 +18,10 @@ public class InputRequestProcessor {
         this.executor = executor;
     }
     public void saveUpdatingRequestinDB(RequestMessage req) throws SQLException {
-        PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET updateddata = ?::jsonb WHERE id = ?");
+        PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET updateddata = ?::jsonb, datetimeupdate = ? WHERE id = ?");
         stmt.setString(1, req.JSONed);
-        stmt.setString(2,  req.ID);
+        stmt.setTimestamp(2, new Timestamp(new Date().getTime()));///new java.sql.Date(new Date().getTime().n));
+        stmt.setString(3,  req.ID);
         System.out.println("executing >>>"+ req.ID);
         stmt.executeUpdate();
     }
@@ -157,7 +158,7 @@ public class InputRequestProcessor {
         String savedJS = String.valueOf(data.get(5));
         Condition result=Condition.SUSPENDING;
         if (data.get(4)!=null){
-            if (savedJS.equals("0"))
+            if (savedJS.length()==10) //&& savedJS.length()<5)
                 result = Condition.DENIED;
             else
                 result = Condition.APPROVED;

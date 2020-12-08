@@ -3,6 +3,7 @@ package util;
 import abstractions.RequestMessage;
 import org.junit.Test;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,4 +87,20 @@ public class InputRequestProcessorTest {
         }
         System.out.println(elems);
     }
+
+    @Test
+    public void lengthextract() throws SQLException {
+        ArrayList data = new ArrayList();
+        data.add(67);
+        Object extracted=null;
+        ResultSet res = db.executor.executePreparedSelect("SELECT * FROM requests WHERE counter=?", data);
+        while (res.next()){
+            extracted = res.getObject("updateddata");
+        }
+        assertNotEquals(null, extracted);
+        System.out.println(String.valueOf(extracted));
+        System.out.println(String.valueOf(extracted).length());
+    }
+
+
 }
