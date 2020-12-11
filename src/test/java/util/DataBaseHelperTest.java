@@ -19,28 +19,7 @@ public class DataBaseHelperTest {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     ///       assertNotEquals(null, conn);
         //    Statement stmt = conn.createStatement();
         //    ResultSet rs = stmt.executeQuery("SELECT ID FROM USERS");
-
-
-
     }
-}
