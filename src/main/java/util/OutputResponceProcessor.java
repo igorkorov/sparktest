@@ -22,7 +22,7 @@ public class OutputResponceProcessor {
         res.approved = true;
         System.out.println("address>>>>\n\n\n"+IDHelper.getaddress(incomingFolder, res.ID));
         writeResponceinDB(res, IDHelper.getaddress(incomingFolder, res.ID));
-        jaktor.sendResponce(res);
+        //jaktor.sendResponce(res);
         updateDateApprove(res.ID);
     };
 
@@ -43,8 +43,9 @@ public class OutputResponceProcessor {
         update.setInt(1, bool2int(res.approved));
         update.setBytes(2, address.getBytes());
 
-        if (r.next())
-            executor.executePreparedSelect("UPDATE status set status=?  where ip=?::bytea", params2);
+        if (r.next()) {
+            update.executeUpdate();
+        }
         else {
             PreparedStatement stmt = executor.getConn().prepareStatement("INSERT INTO status VALUES( ? , ?) ");
             stmt.setBytes(1, address.getBytes());

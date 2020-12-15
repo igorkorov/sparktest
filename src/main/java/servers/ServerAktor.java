@@ -5,6 +5,7 @@ import abstractions.Cypher;
 import abstractions.RequestMessage;
 import abstractions.ResponceMessage;
 import impl.JAktor;
+import servers.threadMessager.ThreadMessager;
 import util.IDHelper;
 import util.InputRequestProcessor;
 
@@ -20,7 +21,11 @@ public class ServerAktor extends JAktor {
     public void setCypher(Cypher cypher) {
         this.cypher = cypher;
     }
-
+    public ThreadMessager msg ;
+    public ServerAktor(){
+        msg = new ThreadMessager();
+        msg.start();
+    };
     @Override
     public int send(byte[] message, String address) throws IOException {
         System.out.println("SENDING to>>"+address);
