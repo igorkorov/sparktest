@@ -50,6 +50,7 @@ public class Deps {
         orp.jaktor=aktor;
         orp.idHelper=idh;
         orp.executor=requests.executor;
+        orp.incomingFolder = incomingFolder;
     }
 
 

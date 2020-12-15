@@ -3,6 +3,8 @@ package util;
 
 import fr.roland.DB.Executor;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,4 +25,12 @@ public class IDHelper {
             return (String) res.getObject(1);
         return null;
     };
+
+    public static  String getaddress(String incomingFolder, String ID) throws IOException {
+        FileReader fr = new FileReader(incomingFolder + "/" + ID);
+        char[] a = new char[200];
+        fr.read(a);
+        fr.close();
+        return String.valueOf(a);
+    }
 }

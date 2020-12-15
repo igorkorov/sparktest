@@ -5,6 +5,7 @@ import abstractions.Cypher;
 import abstractions.RequestMessage;
 import abstractions.ResponceMessage;
 import impl.JAktor;
+import util.IDHelper;
 import util.InputRequestProcessor;
 
 import java.io.*;
@@ -65,11 +66,7 @@ public class ServerAktor extends JAktor {
     }
 
     public void sendResponce(ResponceMessage res) throws IOException {
-        FileReader fr = new FileReader(incomingFolder+"/"+res.ID);
-        char [] a = new char[200];
-        fr.read(a);
-        fr.close();
-        String address = String.valueOf(a);
+        String address = IDHelper.getaddress(incomingFolder, res.ID);
         System.out.println("SENDING responce to"+address);
         send(BinaryMessage.savedToBLOB(res), address);
     };

@@ -28,11 +28,11 @@ public class OutputResponceProcessorTest {
         ResponceMessage responce = new ResponceMessage();
         responce.ID = "1";
         responce.approved = true;
-        orp.writeResponceinDB(responce, "192.****");
+        orp.writeResponceinDB(responce, "http://127.0.1.1:12215/");
         ResultSet res0=orp.executor.submit("SELECT * FROM status");
         assertEquals(true, res0.next());
-
-
+        st = orp.executor.getConn().prepareStatement( "DELETE from status ");
+        st.executeUpdate();
     }
 
     @Test
