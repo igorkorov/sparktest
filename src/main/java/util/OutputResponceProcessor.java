@@ -15,15 +15,42 @@ public class OutputResponceProcessor {
     public ServerAktor jaktor;
     public Readfile Incomming;
     public IDHelper idHelper;
-    public void approve(String ID) throws IOException, SQLException {
+    public void approve(String ID)  {
         System.out.println("ID=>>>"+ID);
         ResponceMessage res = new ResponceMessage();
-        res.ID = idHelper.getIDusingsimpleID(ID);
+        try {
+            res.ID = idHelper.getIDusingsimpleID(ID);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         res.approved = true;
-        System.out.println("address>>>>\n\n\n"+IDHelper.getaddress(incomingFolder, res.ID));
-        writeResponceinDB(res, IDHelper.getaddress(incomingFolder, res.ID));
-        //jaktor.sendResponce(res);
-        updateDateApprove(res.ID);
+        try {
+            System.out.println("address>>>>\n\n\n"+IDHelper.getaddress(incomingFolder, res.ID));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writeResponceinDB(res, IDHelper.getaddress(incomingFolder, res.ID));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // jaktor.sendResponce(res);
+        try {
+            updateDateApprove(res.ID);
+            System.out.println("UPDATE date addrove");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            jaktor.async.asyncSend(res);
+            System.out.println("send responce");
+        } catch (IOException e) {
+            System.out.println("\n\n\n\nerroe when send!\n\n\n");
+        }
+        //jaktor.async.sendAsyncResp(res);
+
     };
 
     public void writeResponceinDB(ResponceMessage res, String address) throws SQLException {

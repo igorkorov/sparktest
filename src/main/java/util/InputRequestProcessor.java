@@ -47,10 +47,10 @@ public class InputRequestProcessor {
             for (int i =1; i<6; i++)
           //  result .add(res.getObject(4));
             {
-                System.out.print(res.getObject(i)+"  ;  ");
+           //     System.out.print(res.getObject(i)+"  ;  ");
                 result.add(res.getObject(i));
             }
-            System.out.println("  ;  ");
+           // System.out.println("  ;  ");
         }
         return result;
     };

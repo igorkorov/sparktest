@@ -110,7 +110,6 @@ public class Spark {
         get("requests", (req, res) -> {
             model.clear();
             model.put("requests", deps.irp.DumpRequestToHTMLTable8());
-            System.out.println(deps.irp.DumpRequestToHTMLTable8());
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "requests.html"));
         });
@@ -140,6 +139,8 @@ public class Spark {
                 String id = req.queryParams("id");
                 deps.orp.approve(id);
                 res.redirect("/requests");
+
+
                 //return eng.render(OK);
             }
             return eng.render(BAD);
@@ -191,7 +192,6 @@ public class Spark {
             while (resultSet.next()) {
                 sb.append("<tr>");
                 String comment = resultSet.getString(7);
-                System.out.println("comment>>>\n\n"+comment);
                 for (int t = 1; t <= 6; t++) {
                     sb.append("<td>");
                     if (t == 3) {
