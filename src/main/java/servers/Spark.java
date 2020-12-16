@@ -1,11 +1,9 @@
 package servers;
-
 import org.jetbrains.annotations.NotNull;
 import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
 import util.Deps;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -21,7 +19,6 @@ public class Spark {
     public static ModelAndView SOCKET = new ModelAndView(map_, "websocket.html");
 
     public static Map<String, Object> model = new HashMap<>();
-
     public static void main(String[] args) throws InterruptedException, SQLException {
         staticFiles.location("/public");
         Deps deps = new Deps();
@@ -208,9 +205,53 @@ public class Spark {
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "requests.html"));
         });
+/*
+        File uploadDir = new File("upload");
+        uploadDir.mkdir(); // create the upload directory if it doesn't exist
 
+
+
+        get("/upload", (req, res) ->
+                "<form method='post' enctype='multipart/form-data'>" // note the enctype
+                        + "    <input type='file' name='uploaded_file' accept='.png'>" // make sure to call getPart using the same "name" in the post
+                        + "    <button>Upload picture</button>"
+                        + "</form>"
+        );
+
+        post("/upload", (req, res) -> {
+
+            Path tempFile = Files.createTempFile(uploadDir.toPath(), "", "");
+
+            req.attribute("org.eclipse.jetty.multipartConfig", new MultipartConfigElement("/temp"));
+
+            try (InputStream input = req.raw().getPart("uploaded_file").getInputStream()) { // getPart needs to use same "name" as input field in form
+                Files.copy(input, tempFile, StandardCopyOption.REPLACE_EXISTING);
+            }
+
+            logInfo(req, tempFile);
+            return "<h1>You uploaded this image:<h1><img src='" + tempFile.getFileName() + "'>";
+
+        });
 
     }
+
+    // methods used for logging
+    private static void logInfo(Request req, Path tempFile) throws IOException, ServletException {
+        System.out.println("Uploaded file '" + getFileName(req.raw().getPart("uploaded_file")) + "' saved as '" + tempFile.toAbsolutePath() + "'");
+    }
+
+    private static String getFileName(Part part) {
+        for (String cd : part.getHeader("content-disposition").split(";")) {
+            if (cd.trim().startsWith("filename")) {
+                return cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+            }
+        }
+        return null;
+    }
+
+*/
+
+}
     public static boolean check(Request req){
         Set<String> attr = req.session().attributes();
         attr.forEach(a -> {System.out.println(a);});
