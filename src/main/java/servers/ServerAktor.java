@@ -7,6 +7,7 @@ import abstractions.ResponceMessage;
 import client.J11Client;
 import impl.JAktor;
 import servers.threadMessager.ThreadMessager;
+import util.Beatyfulizer;
 import util.IDHelper;
 import util.InputRequestProcessor;
 
@@ -50,8 +51,8 @@ public class ServerAktor extends JAktor {
     @Override
     public int send(byte[] message, String address) throws IOException {
         //System.out.println("SENDING to>>"+address);
-       // return this.client.send(this.cypher.encrypt(message), address);
-        return sendj11(message, address);
+        return this.client.send(this.cypher.encrypt(message), address);
+      //  return sendj11(message, address);
     }
 
     @Override
@@ -76,9 +77,19 @@ public class ServerAktor extends JAktor {
                 throwables.printStackTrace();
             }
             sendWebsocketAlerts();
-
             return;
         }
+        if (req.type.equals(RequestMessage.Type.ask)) {
+            ResponceMessage res = new ResponceMessage();
+            res.ID = req.ID;
+            res.approved = true;
+            System.out.println("SENDING RESPONXE");
+            sendResponce(res);
+            sendWebsocketAlerts();
+            return;
+        }
+
+
     }
 
     public void saveRequest(RequestMessage req) throws IOException {
@@ -97,9 +108,11 @@ public class ServerAktor extends JAktor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println("SENDING responce to"+address);
+        System.out.println("INITIAL ADDRESS\n"+address);
+        String address_ = Beatyfulizer.trimAddress(address);
+        System.out.println("SENDING responce to\n"+address_);
         try {
-            send(BinaryMessage.savedToBLOB(res), address);
+            send(BinaryMessage.savedToBLOB(res), address_);
         } catch (IOException e) {
             System.out.println("SHIT HAPPENS"+e);
         }

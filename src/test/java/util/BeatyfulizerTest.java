@@ -13,4 +13,11 @@ public class BeatyfulizerTest {
         assertNotEquals(null,  Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(first), ParcedJSON.parse(second)) );
         System.out.println(Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(first), ParcedJSON.parse(second)));
     }
+
+    @Test
+    public void trimAddress() {
+        String oldaddress = "http://127.0.1.1:12215/";
+        String trimmed = "http://127.0.1.1:12215";
+        assertEquals(trimmed, Beatyfulizer.trimAddress(oldaddress));
+    }
 }

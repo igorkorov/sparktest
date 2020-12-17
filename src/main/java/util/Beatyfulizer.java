@@ -5,7 +5,12 @@ public class Beatyfulizer {
 
     };
 
-
+    public static String trimAddress(String input){
+        if (input.charAt(input.length() - 1) != '/') {
+            return input;
+        }
+        return input.substring(0, input.length()-1);
+    };
 
     public static String compareundschoneJSON(ParcedJSON input, ParcedJSON compare){
         String styleinject = "  style=\"background-color: yellow;\"";
