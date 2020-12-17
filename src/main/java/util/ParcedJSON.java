@@ -14,12 +14,12 @@ public class ParcedJSON {
     public String Brutto;
     public String Clogging;
     public String Trash;
+    public String Comment;
     public static ParcedJSON parse(String input) throws ParseException {
         if (input.length()<5)
             return null;
         Object obj = new JSONParser().parse(input);
         JSONObject jo = (JSONObject) obj;
-
         ParcedJSON pj = new ParcedJSON();
         pj.Date = (String) jo.get("Date");
         pj.Time = (String) jo.get("Time");
@@ -30,6 +30,7 @@ public class ParcedJSON {
         pj.Brutto = (String) jo.get("Brutto");
         pj.Clogging = (String) jo.get("Clogging");
         pj.Trash = (String) jo.get("Trash");
+        pj.Comment = (String) jo.get("Comment");
         return pj;
     };
 

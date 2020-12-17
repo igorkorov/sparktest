@@ -64,6 +64,11 @@ public class Beatyfulizer {
         else
             result.append("<p"+ styleinject +">Примесь: "+ input.Trash +   "<br>");
 
+        if ((input.Comment ==null) || input.Comment.equals(compare.Comment))
+            result.append("<p>Комментарий: "+ input.Comment +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Комментарий: "+ input.Comment +   "<br>");
+
         return result.toString();
 
 
@@ -82,6 +87,7 @@ public class Beatyfulizer {
         result.append("<p>Брутто: "+ input.Brutto +   "<br>");
         result.append("<p>Засор: "+ input.Clogging +   "<br>");
         result.append("<p>Примесь: "+ input.Trash +   "<br>");
+        result.append("<p>Комментарий: "+ input.Comment +   "<br>");
  /*       result.append("Время: "+ input.Time +   "<br>");
         result.append("Номер накладной: "+ input.Waybill_number +    "<br>");
         result.append("Металл: "+ input.Metall +    "<br>");

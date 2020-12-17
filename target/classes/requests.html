@@ -24,6 +24,7 @@ var socket = new WebSocket("ws://localhost:4567/echo");
 socket.onmessage = function(event) {
   var incomingMessage = event.data;
   addscript(incomingMessage);
+  location.reload();
 };
 // показать сообщение в div#subscribe
 function addscript(scripted){

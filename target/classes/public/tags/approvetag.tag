@@ -1,7 +1,7 @@
 <approvetag>
 <div ref="container" align='center'>
 <button ref = "btn" type="button" class="btn btn-success" onclick="{approve}">Разрешить </button><br><br>
-<button ref = "btn2" type="button" class="btn btn-danger" onclick="{suppress}">Запретить''</button>
+<button ref = "btn2" type="button" class="btn btn-danger" onclick="{suppress}">Запретить''</button><br>
 </div>
 <script>
       this.on("mount",
@@ -64,6 +64,11 @@
             clearTimeout(xhrTimeout)
             if (xhr.status == 200) {
                 alert('ответ отправлен');
+                location.reload();
+            }
+            if (xhr.status == 500) {
+                alert('ответ отправлен');
+                location.reload();
             }
         }
 
@@ -74,6 +79,7 @@
         {
             alert("Ошибка: "+message)
         }
+
       }
 
       suppress()
@@ -110,6 +116,11 @@
                     clearTimeout(xhrTimeout)
                     if (xhr.status == 200) {
                         alert('ответ отправлен');
+                        location.reload();
+                    }
+                    if (xhr.status == 500) {
+                        alert('ответ отправлен');
+                        location.reload();
                     }
                 }
 
@@ -120,6 +131,7 @@
                 {
                     alert("Ошибка: "+message)
                 }
+
       }
 
 </script>
