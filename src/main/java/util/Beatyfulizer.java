@@ -6,17 +6,18 @@ public class Beatyfulizer {
     };
 
     public static String trimAddress(String input){
+        System.out.println("CHARS:: "+input.charAt(input.length() - 1));
         if (input.charAt(input.length() - 1) != '/') {
             return input;
         }
         return input.substring(0, input.length()-1);
+     //   return input;
     };
 
     public static String compareundschoneJSON(ParcedJSON input, ParcedJSON compare){
         String styleinject = "  style=\"background-color: yellow;\"";
         if ((input==null) || (compare==null) )
             return schoneJSON(input);
-
         StringBuilder result = new StringBuilder();
         if ((input.Date ==null) || input.Date.equals(compare.Date))
             result.append("<p>Дата: "+ input.Date +   "<br>");
@@ -68,10 +69,7 @@ public class Beatyfulizer {
             result.append("<p>Комментарий: "+ input.Comment +   "<br>");
         else
             result.append("<p"+ styleinject +">Комментарий: "+ input.Comment +   "<br>");
-
         return result.toString();
-
-
     };
 
     public static String schoneJSON(ParcedJSON input){

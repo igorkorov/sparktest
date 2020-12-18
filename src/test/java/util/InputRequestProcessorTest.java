@@ -76,17 +76,7 @@ public class InputRequestProcessorTest {
         }
     }
 
-    @Test
-    public void pyramide(){
-        int elems=0;
-        int stagesum=1;
-        for (int i=1; i<=100; i++){
-            System.out.println("stage #"+i);
-            elems +=stagesum;
-            stagesum+=2;
-        }
-        System.out.println(elems);
-    }
+
 
     @Test
     public void lengthextract() throws SQLException {

@@ -25,7 +25,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
         </dependency>
-
+        <dependency>
+            <groupId>net.java.dev.jna</groupId>
+            <artifactId>jna</artifactId>
+            <version>4.5.2</version>
+        </dependency>
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
@@ -57,7 +61,7 @@
         <dependency>
             <groupId>eu.roland</groupId>
             <artifactId>JAKtor</artifactId>
-            <version>1.8-SNAPSHOT</version>
+            <version>1.9-ROLLBACK</version>
         </dependency>
         <dependency>
             <groupId>com.sparkjava</groupId>
