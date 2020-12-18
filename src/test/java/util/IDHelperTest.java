@@ -1,6 +1,7 @@
 package util;
 
 import org.junit.Test;
+import util.DB.DataBaseHelper;
 
 
 import java.sql.SQLException;

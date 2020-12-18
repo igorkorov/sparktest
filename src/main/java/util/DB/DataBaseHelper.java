@@ -1,4 +1,4 @@
-package util;
+package util.DB;
 
 import fr.roland.DB.Executor;
 

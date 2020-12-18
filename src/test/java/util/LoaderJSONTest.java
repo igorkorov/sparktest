@@ -1,6 +1,8 @@
 package util;
 
 import org.junit.Test;
+import util.DB.DataBaseHelper;
+import util.JSON.LoaderJSON;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

@@ -1,9 +1,11 @@
-package util;
+package util.processors;
 
 import abstractions.Condition;
 import abstractions.RequestMessage;
 import fr.roland.DB.Executor;
 import org.json.simple.parser.ParseException;
+import util.JSON.Beatyfulizer;
+import util.JSON.ParcedJSON;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

@@ -1,5 +1,7 @@
 package util;
 import org.junit.Test;
+import util.DB.DataBaseHelper;
+
 import java.sql.SQLException;
 import static org.junit.Assert.*;
 public class LoginCheckerTest {

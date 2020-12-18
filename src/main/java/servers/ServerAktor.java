@@ -7,9 +7,9 @@ import abstractions.ResponceMessage;
 import client.J11Client;
 import impl.JAktor;
 import servers.threadMessager.ThreadMessager;
-import util.Beatyfulizer;
+import util.JSON.Beatyfulizer;
 import util.IDHelper;
-import util.InputRequestProcessor;
+import util.processors.InputRequestProcessor;
 
 import java.io.*;
 import java.net.ConnectException;

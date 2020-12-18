@@ -2,6 +2,8 @@ package util;
 
 import org.json.simple.parser.ParseException;
 import org.junit.Test;
+import util.JSON.Beatyfulizer;
+import util.JSON.ParcedJSON;
 
 import static org.junit.Assert.*;
 

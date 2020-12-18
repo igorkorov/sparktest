@@ -1,4 +1,4 @@
-package util;
+package util.JSON;
 
 public class Beatyfulizer {
     public Beatyfulizer(){
