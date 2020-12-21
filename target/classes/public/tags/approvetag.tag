@@ -16,7 +16,7 @@
             this.refs.container.disabled=true
             this.refs.btn2.disabled=true
 
-            if (stat=='DENIED')
+            if (stat=='DECLINED')
             {
                 this.refs.container.innerHTML = "<h5 align='center'  style='color:red;'>Запрещено</h5>"
             }

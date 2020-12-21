@@ -8,10 +8,12 @@ import abstractions.ResponceMessage;
 import fr.roland.DB.Executor;
 import org.json.simple.parser.ParseException;
 import servers.ServerAktor;
+import util.Deps;
 import util.JSON.Beatyfulizer;
 import util.JSON.ParcedJSON;
 
 import javax.xml.crypto.dsig.keyinfo.KeyName;
+import java.io.File;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -247,6 +249,8 @@ public class InputRequestProcessor {
     }
 
     Condition getStatus(String ID, String FileName) throws IOException {
+        if (!new File(FileName).exists())
+            return null;
         PendingResponces resp = (PendingResponces) BinaryMessage.restored(BinaryMessage.readBytes(FileName));
         if (resp != null)
             return resp.ReqMap.get(ID);
@@ -254,13 +258,24 @@ public class InputRequestProcessor {
         return null;
     };
 
-    public void processAsk(RequestMessage req){
+    public void removeStatus(String ID, String FileName) throws IOException {
+        PendingResponces resp = (PendingResponces) BinaryMessage.restored(BinaryMessage.readBytes(FileName));
+        if (resp == null)
+            return ;
+        resp.ReqMap.remove(ID) ;
+    };
 
+    public void processAsk(RequestMessage req) throws IOException {
+        if (getStatus(req.ID, Deps.PendingResponcesFile)==null)
+            return;
         ResponceMessage res = new ResponceMessage();
         res.ID = req.ID;
-        System.out.println("ID>>>>"+req.ID);
-        res.approved = true;
+        res.approved=false;
+        Condition cond = getStatus(req.ID, Deps.PendingResponcesFile);
+        if (cond.equals(Condition.APPROVED))
+           res.approved=true;
         System.out.println("SENDING RESPONXE");
+        removeStatus(res.ID , Deps.PendingResponcesFile);
         jaktor.sendResponce(res);
         //sendWebsocketAlerts();
     };

@@ -18,5 +18,18 @@ public class InputRequestProcessorTest {
         orp.saveStatus(filename, id, cond);
         Condition rest =irp.getStatus(id, filename);
         assertEquals(cond, rest);
+        assertEquals(null, irp.getStatus("ioioio", "fdjghjfdhgjdfhgfdj"));
+    }
+
+
+    @Test
+    public void removeStatus() throws IOException {
+        orp.saveStatus(filename, id, cond);
+        Condition rest =irp.getStatus(id, filename);
+        assertEquals(cond, rest);
+        assertEquals(null, irp.getStatus("ioioio", "fdjghjfdhgjdfhgfdj"));
+        irp.removeStatus(id, filename);
+        assertEquals(null, irp.getStatus("ioioio", filename));
+
     }
 }

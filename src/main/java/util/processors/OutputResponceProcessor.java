@@ -126,21 +126,52 @@ public class OutputResponceProcessor {
     }
 
     public void updateDateApprove(String ID) throws SQLException {
-       PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET datetimeapprove = ? WHERE id = ?");
-       stmt.setTimestamp(1, new Timestamp(new Date().getTime()));
-       stmt.setString(2, ID);
-       stmt.executeUpdate();
-   }
+        PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET datetimeapprove = ? WHERE id = ?");
+        stmt.setTimestamp(1, new Timestamp(new Date().getTime()));
+        stmt.setString(2, ID);
+        stmt.executeUpdate();
+    }
 
     public void decline(String ID) throws SQLException, IOException {
+        System.out.println("EXECUTE DECLINE @"+ ID);
         System.out.println("ID=>>>"+ID);
         ResponceMessage res = new ResponceMessage();
-
-        res.ID = idHelper.getIDusingsimpleID(ID);
+        try {
+            res.ID = idHelper.getIDusingsimpleID(ID);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         res.approved = false;
-        saveStatus(Deps.PendingResponcesFile, res.ID, Condition.DECLINED);
-        jaktor.sendResponce(res);
-        updateDateDecline(res.ID);
+        try {
+            System.out.println("address>>>>\n\n\n"+IDHelper.getaddress(incomingFolder, res.ID));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            writeResponceinDB(res, IDHelper.getaddress(incomingFolder, res.ID));
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        // jaktor.sendResponce(res);
+        try {
+            updateDateDecline(res.ID);
+            System.out.println("UPDATE date Decline");
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        try {
+            saveStatus(Deps.PendingResponcesFile, res.ID, Condition.DECLINED);
+            jaktor.async.asyncSend(res);
+            System.out.println("send responce");
+        } catch (IOException e) {
+            System.out.println("\n\n\n\nerroe when send!\n\n\n");
+        }
+        //jaktor.async.sendAsyncResp(res);
+
+
+
     };
 
     public void updateDateDecline(String ID) throws SQLException {
@@ -150,6 +181,5 @@ public class OutputResponceProcessor {
         stmt.setString(2, "{\"a\":\"0\"}");
         stmt.setString(3, ID);
         stmt.executeUpdate();
-
     }
 }
