@@ -4,7 +4,7 @@ import Message.abstractions.BinaryMessage;
 import abstractions.Cypher;
 import abstractions.RequestMessage;
 import abstractions.ResponceMessage;
-import client.J11Client;
+//import client.J11Client;
 import impl.JAktor;
 import servers.threadMessager.ThreadMessager;
 import util.JSON.Beatyfulizer;
@@ -18,7 +18,7 @@ import java.sql.SQLException;
 public class ServerAktor extends JAktor {
     public String incomingFolder;
     public Cypher cypher;
-    public J11Client clientj11=new J11Client();
+  //  public J11Client clientj11=new J11Client();
     public Class<EchoWebSocket> echoWebSocket;
     public InputRequestProcessor irp;
     public void setCypher(Cypher cypher) {
@@ -34,11 +34,11 @@ public class ServerAktor extends JAktor {
         }
     };
 
-
+/*
     public int sendj11(byte[] message, String address) {
         System.out.println("SENDING to>>"+address+"     ::@J11Client");
         try {
-            return clientj11.send(this.cypher.encrypt(message), address);
+          //  return clientj11.send(this.cypher.encrypt(message), address);
         } catch (ConnectException e) {
             System.out.println("SHIT HAPPENS!!"+e);
             return -1;
@@ -47,7 +47,7 @@ public class ServerAktor extends JAktor {
             return -2;
         }
     }
-
+*/
     @Override
     public int send(byte[] message, String address) throws IOException {
         //System.out.println("SENDING to>>"+address);
