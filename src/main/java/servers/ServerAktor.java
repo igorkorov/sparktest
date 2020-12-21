@@ -80,13 +80,7 @@ public class ServerAktor extends JAktor {
             return;
         }
         if (req.type.equals(RequestMessage.Type.ask)) {
-            ResponceMessage res = new ResponceMessage();
-            res.ID = req.ID;
-            System.out.println("ID>>>>"+req.ID);
-            res.approved = true;
-            System.out.println("SENDING RESPONXE");
-            sendResponce(res);
-            sendWebsocketAlerts();
+            irp.processAsk(req);
             return;
         }
 
@@ -112,10 +106,8 @@ public class ServerAktor extends JAktor {
         System.out.println("INITIAL ADDRESS\n"+address);
         String address_ = Beatyfulizer.trimAddress(address);
         System.out.println("SENDING responce to\n"+address);
-        String addr ="http://127.0.1.1:12215";
         System.out.println("address  "+address);
         System.out.println("address_ "+address_);
-        System.out.println("addr "+addr);
         try {
             send(BinaryMessage.savedToBLOB(res), address);
         } catch (IOException e) {

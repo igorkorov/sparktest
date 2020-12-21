@@ -10,6 +10,7 @@ import util.readfile.Readfile;
 import java.sql.SQLException;
 
 public class Deps {
+    public static String PendingResponcesFile = "rendresp.bin";
     public LoginChecker loginchecker;
     public DataBaseHelper dbhelper;
     public Cypher cypher;
@@ -54,6 +55,7 @@ public class Deps {
         orp.idHelper=idh;
         orp.executor=requests.executor;
         orp.incomingFolder = incomingFolder;
+        irp.jaktor=aktor;
     }
 
 

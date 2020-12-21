@@ -1,12 +1,18 @@
 package util.processors;
 
+import Message.abstractions.BinaryMessage;
 import abstractions.Condition;
+import abstractions.PendingResponces;
 import abstractions.RequestMessage;
+import abstractions.ResponceMessage;
 import fr.roland.DB.Executor;
 import org.json.simple.parser.ParseException;
+import servers.ServerAktor;
 import util.JSON.Beatyfulizer;
 import util.JSON.ParcedJSON;
 
+import javax.xml.crypto.dsig.keyinfo.KeyName;
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,7 +21,11 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class InputRequestProcessor {
+    public ServerAktor jaktor;
     private Executor executor;
+    public InputRequestProcessor(){
+    };
+
     public InputRequestProcessor(Executor executor){
         this.executor = executor;
     }
@@ -161,14 +171,14 @@ public class InputRequestProcessor {
         Condition result=Condition.SUSPENDING;
         if (data.get(4)!=null){
             if (savedJS.length()==10) //&& savedJS.length()<5)
-                result = Condition.DENIED;
+                result = Condition.DECLINED;
             else
                 result = Condition.APPROVED;
 
         }
         String savedJSON="";
         String initialJSON = Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))));
-        if (!result.equals(Condition.DENIED))
+        if (!result.equals(Condition.DECLINED))
             savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
         sb.append("<td  align=\"center\">"+data.get(0)+"</td>");
         sb.append("<td align=\"center\">"+data.get(1)+"</td>");
@@ -235,6 +245,25 @@ public class InputRequestProcessor {
         sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
         return sb.toString();
     }
+
+    Condition getStatus(String ID, String FileName) throws IOException {
+        PendingResponces resp = (PendingResponces) BinaryMessage.restored(BinaryMessage.readBytes(FileName));
+        if (resp != null)
+            return resp.ReqMap.get(ID);
+        else
+        return null;
+    };
+
+    public void processAsk(RequestMessage req){
+
+        ResponceMessage res = new ResponceMessage();
+        res.ID = req.ID;
+        System.out.println("ID>>>>"+req.ID);
+        res.approved = true;
+        System.out.println("SENDING RESPONXE");
+        jaktor.sendResponce(res);
+        //sendWebsocketAlerts();
+    };
 
 
 }

@@ -1,7 +1,7 @@
 package abstractions;
 
 public enum Condition {
-    DENIED,
+    DECLINED,
     APPROVED,
     SUSPENDING
 }

@@ -1,14 +1,23 @@
 package util.processors;
 
+import Message.abstractions.BinaryMessage;
+import abstractions.Condition;
+import abstractions.PendingResponces;
 import abstractions.ResponceMessage;
 import fr.roland.DB.Executor;
 import servers.ServerAktor;
+import util.Deps;
 import util.IDHelper;
 import util.readfile.Readfile;
+
+import java.io.File;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import static Message.abstractions.BinaryMessage.*;
 
 public class OutputResponceProcessor {
     public String incomingFolder;
@@ -45,6 +54,7 @@ public class OutputResponceProcessor {
             throwables.printStackTrace();
         }
         try {
+            saveStatus(Deps.PendingResponcesFile, res.ID, Condition.APPROVED);
             jaktor.async.asyncSend(res);
             System.out.println("send responce");
         } catch (IOException e) {
@@ -52,6 +62,20 @@ public class OutputResponceProcessor {
         }
         //jaktor.async.sendAsyncResp(res);
 
+    };
+
+    public void saveStatus(String FileName, String Id, Condition cond) throws IOException {
+        if (!new File(FileName).exists()){
+            BinaryMessage.write(BinaryMessage.savedToBLOB( new PendingResponces(new HashMap<>())), FileName);
+        }
+        PendingResponces pend = (PendingResponces) restored(readBytes(FileName));
+        if (pend == null){
+            pend = new PendingResponces(new HashMap<>());
+            BinaryMessage.write(BinaryMessage.savedToBLOB(pend), FileName);
+        };
+        PendingResponces pend__ = (PendingResponces) restored(readBytes(FileName));
+        pend__.ReqMap.put(Id, cond);
+        BinaryMessage.write(BinaryMessage.savedToBLOB(pend__), FileName);
     };
 
     public void writeResponceinDB(ResponceMessage res, String address) throws SQLException {
@@ -114,6 +138,7 @@ public class OutputResponceProcessor {
 
         res.ID = idHelper.getIDusingsimpleID(ID);
         res.approved = false;
+        saveStatus(Deps.PendingResponcesFile, res.ID, Condition.DECLINED);
         jaktor.sendResponce(res);
         updateDateDecline(res.ID);
     };
