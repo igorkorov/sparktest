@@ -1,6 +1,7 @@
 package util;
 
 import abstractions.RequestMessage;
+import org.json.simple.parser.ParseException;
 import org.junit.Test;
 import util.DB.DataBaseHelper;
 import util.processors.InputRequestProcessor;
@@ -43,7 +44,7 @@ public class InputRequestProcessorTest {
     }
 
     @Test
-    public void saveUpdatingRequestinDB() throws SQLException {
+    public void saveUpdatingRequestinDB() throws SQLException, ParseException {
         RequestMessage req = new RequestMessage("555" , "must done", "{\"name\": \"roland\"}");
         //    irp.saveRequestinDB(req);
         irp.saveUpdatingRequestinDB(req);

@@ -1,15 +1,22 @@
 package util;
 
+import Message.abstractions.BinaryMessage;
 import abstractions.Cypher;
+import abstractions.Settings;
 import servers.EchoWebSocket;
 import servers.ServerAktor;
 import util.DB.DataBaseHelper;
+import util.DB.ProductionUPDATE;
 import util.processors.InputRequestProcessor;
 import util.processors.OutputResponceProcessor;
 import util.readfile.Readfile;
+
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 
 public class Deps {
+    public final String lockProd = "prod.bin";
     public static String PendingResponcesFile = "rendresp.bin";
     public LoginChecker loginchecker;
     public DataBaseHelper dbhelper;
@@ -17,19 +24,32 @@ public class Deps {
     public ServerAktor aktor;
     public InputRequestProcessor irp;
     public String fileprops = "setts.ini";
+    public String binprops = "setts.bin";
     public String incomingFolder = "requests";
-    private Readfile Settings;
+  //  private Readfile Settings;
     private Readfile Incomming;
     public IDHelper idh;
     public Class<EchoWebSocket> echoWebSocket;
     public OutputResponceProcessor orp;
     public DataBaseHelper requests;
     public DataBaseHelper users;
+    public ProductionUPDATE prod;
+    private abstractions.Settings setts;
 
-    public Deps() throws InterruptedException, SQLException {
-        requests = new DataBaseHelper("requests");
-        users = new DataBaseHelper();
-        Settings = new Readfile(fileprops);
+    public Deps() throws InterruptedException, SQLException, IOException {
+        if (!new File(binprops).exists()){
+            System.out.println("Binnary settings file not exist");
+            return;
+        }
+        setts = (abstractions.Settings) BinaryMessage.restored(BinaryMessage.readBytes(binprops));
+        prod = new ProductionUPDATE();
+        if (new File(lockProd).exists()){
+            prod.Production=true;
+            prod.init();
+        }
+        requests = new DataBaseHelper(setts.requestsPOSTGRESConnect, true);//requests = new DataBaseHelper("requests");
+        users = new DataBaseHelper(setts.usersPostgresConnect, true);
+       // Settings = new Readfile(fileprops);
         Incomming = new Readfile(incomingFolder);
         try {
             this.loginchecker = new LoginChecker( users.executor);
@@ -39,11 +59,12 @@ public class Deps {
 
         idh = new IDHelper(requests.executor);
         irp = new InputRequestProcessor(requests.executor);
+        irp.prod=prod;
         this.cypher = new CypherImpl();
         aktor = new ServerAktor();
         aktor.irp=irp;
         aktor.incomingFolder = incomingFolder;
-        aktor.setAddress(Settings.AktorPORT());
+        aktor.setAddress(setts.AktorPORT);
         aktor.echoWebSocket = echoWebSocket;
 
         aktor.setCypher(cypher);

@@ -4,6 +4,8 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.template.velocity.VelocityTemplateEngine;
 import util.Deps;
+
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -19,12 +21,19 @@ public class Spark {
     public static ModelAndView SOCKET = new ModelAndView(map_, "websocket.html");
 
     public static Map<String, Object> model = new HashMap<>();
-    public static void main(String[] args) throws InterruptedException, SQLException {
+    public static void main(String[] args) throws InterruptedException, SQLException, IOException {
         staticFiles.location("/public");
         Deps deps = new Deps();
         deps.echoWebSocket =  EchoWebSocket.class;
 
         webSocket("/echo", EchoWebSocket.class);
+
+
+        get("todo", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "todo.html"));
+        });
 
 
         get("users", (req, res) -> {
@@ -103,6 +112,8 @@ public class Spark {
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "requests.html"));
         });
+
+
 
         get("requests", (req, res) -> {
             model.clear();

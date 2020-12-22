@@ -8,6 +8,7 @@ import abstractions.ResponceMessage;
 import fr.roland.DB.Executor;
 import org.json.simple.parser.ParseException;
 import servers.ServerAktor;
+import util.DB.ProductionUPDATE;
 import util.Deps;
 import util.JSON.Beatyfulizer;
 import util.JSON.ParcedJSON;
@@ -25,19 +26,22 @@ import java.util.Date;
 public class InputRequestProcessor {
     public ServerAktor jaktor;
     private Executor executor;
+    public ProductionUPDATE prod;
     public InputRequestProcessor(){
     };
 
     public InputRequestProcessor(Executor executor){
         this.executor = executor;
     }
-    public void saveUpdatingRequestinDB(RequestMessage req) throws SQLException {
+    public void saveUpdatingRequestinDB(RequestMessage req) throws SQLException, ParseException {
         PreparedStatement stmt = executor.getConn().prepareStatement("UPDATE requests SET updateddata = ?::jsonb, datetimeupdate = ? WHERE id = ?");
         stmt.setString(1, req.JSONed);
         stmt.setTimestamp(2, new Timestamp(new Date().getTime()));///new java.sql.Date(new Date().getTime().n));
         stmt.setString(3,  req.ID);
         System.out.println("executing >>>"+ req.ID);
         stmt.executeUpdate();
+        prod.fullupdate(ParcedJSON.parse(req.JSONed));
+
     }
 
     public void saveRequestinDB(RequestMessage req) throws SQLException {

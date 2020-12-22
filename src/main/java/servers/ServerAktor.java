@@ -6,6 +6,7 @@ import abstractions.RequestMessage;
 import abstractions.ResponceMessage;
 //import client.J11Client;
 import impl.JAktor;
+import org.json.simple.parser.ParseException;
 import servers.threadMessager.ThreadMessager;
 import util.JSON.Beatyfulizer;
 import util.IDHelper;
@@ -73,7 +74,7 @@ public class ServerAktor extends JAktor {
         if (req.type.equals(RequestMessage.Type.update)) {
             try {
                 irp.saveUpdatingRequestinDB(req);
-            } catch (SQLException throwables) {
+            } catch (SQLException | ParseException throwables) {
                 throwables.printStackTrace();
             }
             sendWebsocketAlerts();
