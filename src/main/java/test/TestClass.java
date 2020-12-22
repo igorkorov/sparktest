@@ -1,18 +1,24 @@
 package test;
 
+import fr.roland.DB.Executor;
+import org.jetbrains.annotations.NotNull;
 import util.DB.DataBaseHelper;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class TestClass {
     public static void main(String[] args) throws SQLException {
-        System.out.println("TESTSTS");
+        System.out.println("UU");
        // DataBaseHelper dbh = new DataBaseHelper("jdbc:mysql://localhost/avs?user=avs&password=evbhPoU5JkW9fZyX", true);
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX");
-        ResultSet metals = conn.createStatement().executeQuery("SELECT * FROM metal");
+        Executor exec  = new Executor("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX") ;
+
+
+        ArrayList data = new ArrayList<>();
+        data.add("АКБ ПП залитые");
+
+
+        ResultSet metals = exec.executePreparedSelect("SELECT * FROM metal where name=?", data);
         while (metals.next()){
             System.out.println(String.valueOf(metals.getObject("id")) + " :::  "+ String.valueOf(metals.getObject("name")));
         }
