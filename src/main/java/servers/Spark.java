@@ -146,6 +146,13 @@ public class Spark {
                     new ModelAndView(model, "requestsx.html"));
         });
 
+        get("dump", (req, res) -> {
+            model.clear();
+
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "dump.html"));
+        });
+
         get("requests", (req, res) -> {
             model.clear();
             model.put("requests", deps.irp.DumpRequestToHTMLTable8usingmatrixhardcoded());

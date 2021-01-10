@@ -17,7 +17,7 @@ public class ProductionUPDATE {
 
     };
     public void init() throws SQLException {
-        //exec  = new Executor("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX") ;;
+        exec  = new Executor("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX") ;;
     }
     public String getMetalID(String metal) throws SQLException {
 

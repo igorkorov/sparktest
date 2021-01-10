@@ -15,6 +15,8 @@ import util.JSON.ParcedJSON;
 
 import javax.xml.crypto.dsig.keyinfo.KeyName;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -227,7 +229,8 @@ public class InputRequestProcessor {
 
     };
 
-    public String DumpRequestToHTMLTableReact() throws SQLException, ParseException {
+    public String DumpRequestToHTMLTableReact() throws SQLException, ParseException, IOException {
+ ////////  FileOutputStream fos = new FileOutputStream("dump.requests");
         ArrayList<ArrayList> data = loadrequests8inmatrix();
         System.out.println("SIZE::"+data.size());
         StringBuilder sb = new StringBuilder();
@@ -236,10 +239,14 @@ public class InputRequestProcessor {
         for (int i=0; i<data.size(); i++){
             String result = String.valueOf(processRow(sb, data.get(i)));
             int numbertag=number_row--;
-            sb.append("<td><div id=\"approvetag"+(numbertag)+"\"></div>  <script type=\"text/babel\">\n" +
+            sb.append("<td><div id=\"approvetag"+(numbertag)+"\"></div></td><tr>" +
+                    " <script type=\"text/babel\">\n" +
                     "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));" +
-                    "        </script>  </td><tr>");
+                    "        </script>  ");
+  ///////       String dump = "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));\n" ;
+  ///////       fos.write(dump.getBytes() );
         };
+ ///////   fos.close();
         return sb.toString();
     }
 
