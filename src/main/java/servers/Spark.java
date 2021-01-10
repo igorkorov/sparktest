@@ -42,11 +42,37 @@ public class Spark {
                     new ModelAndView(model, "users.html"));
         });
 
+        get("re", (req, res) -> {
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "re.html"));
+        });
+
         get("react", (req, res) -> {
             model.clear();
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "react.html"));
         });
+
+        get("dyreact", (req, res) -> {
+            model.clear();
+            model.put("dynoids", deps.react.blobId(500));
+            model.put("dymounts", deps.react.blobScript(500));
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "dyreact.html"));
+        });
+        get("oneriot", (req,res)->{
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "oneriot.html"));
+        });
+
+        get("onereact", (req,res)->{
+            model.clear();
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "onereact.html"));
+        });
+
         get("ajax", (req,res)->{
             model.clear();
             String params = req.queryParams("params");
@@ -113,11 +139,16 @@ public class Spark {
                     new ModelAndView(model, "requests.html"));
         });
 
-
+        get("requestsx", (req, res) -> {
+            model.clear();
+            model.put("requests", deps.irp.DumpRequestToHTMLTableReact());
+            return new VelocityTemplateEngine().render(
+                    new ModelAndView(model, "requestsx.html"));
+        });
 
         get("requests", (req, res) -> {
             model.clear();
-            model.put("requests", deps.irp.DumpRequestToHTMLTable8());
+            model.put("requests", deps.irp.DumpRequestToHTMLTable8usingmatrixhardcoded());
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "requests.html"));
         });
@@ -143,6 +174,18 @@ public class Spark {
             return eng.render(BAD);
         });
         get("/approve", (req,res)->{
+            if (check(req)){
+                String id = req.queryParams("id");
+                deps.orp.approve(id);
+                res.redirect("/requests");
+
+
+                //return eng.render(OK);
+            }
+            return eng.render(BAD);
+        });
+
+        get("/react", (req,res)->{
             if (check(req)){
                 String id = req.queryParams("id");
                 deps.orp.approve(id);

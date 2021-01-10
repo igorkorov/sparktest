@@ -9,6 +9,7 @@ import util.DB.DataBaseHelper;
 import util.DB.ProductionUPDATE;
 import util.processors.InputRequestProcessor;
 import util.processors.OutputResponceProcessor;
+import util.react.ReactBlob;
 import util.readfile.Readfile;
 
 import java.io.File;
@@ -34,6 +35,7 @@ public class Deps {
     public DataBaseHelper requests;
     public DataBaseHelper users;
     public ProductionUPDATE prod;
+    public ReactBlob react = new ReactBlob();
     private abstractions.Settings setts;
 
     public Deps() throws InterruptedException, SQLException, IOException {

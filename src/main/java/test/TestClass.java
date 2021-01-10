@@ -8,7 +8,7 @@ public class TestClass {
     public static void main(String[] args) throws SQLException {
         System.out.println("UU");
        // DataBaseHelper dbh = new DataBaseHelper("jdbc:mysql://localhost/avs?user=avs&password=evbhPoU5JkW9fZyX", true);
-        Executor exec  = new Executor("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX") ;
+        Executor exec  = new Executor();//("jdbc:mysql://localhost:3306/avs", "avs", "evbhPoU5JkW9fZyX") ;
      //   update weighing_items set trash = '?', clogging='?', tare ='?', brutto ='?', metal_id = '?' WHERE weighing_id='ID/';
     //    UPDATE weighings set comment = 'TEST'  WHERE id = '34';//
         ArrayList data = new ArrayList<>();

@@ -12,12 +12,12 @@ public class ProductionUPDATETest {
     public ProductionUPDATETest() throws SQLException {
     }
 
-    @Test
+
     public void testConnect(){
         assertNotEquals(null, dbh.executor.getConn());
     }
 
-    @Test
+
     public void getMetalID() {
         String find = "Радиатор латунный";
         int etalon = 10;

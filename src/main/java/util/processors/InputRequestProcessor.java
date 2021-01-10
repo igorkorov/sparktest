@@ -27,6 +27,7 @@ public class InputRequestProcessor {
     public ServerAktor jaktor;
     private Executor executor;
     public ProductionUPDATE prod;
+
     public InputRequestProcessor(){
     };
 
@@ -172,7 +173,6 @@ public class InputRequestProcessor {
     }
 
     public Condition processRow(StringBuilder sb, ArrayList data) throws ParseException {
-        boolean data_approve = true;
         String savedJS = String.valueOf(data.get(5));
         Condition result=Condition.SUSPENDING;
         if (data.get(4)!=null){
@@ -215,6 +215,31 @@ public class InputRequestProcessor {
             sb.append("<td><approvetag status=\""+result+"\"number=\""+(number_row--)+"\"></approvetag></td><tr>");
         };
         //sb.append("<td><approvetag number=\""+(number_row--)+"\"></approvetag></td><tr>");
+        return sb.toString();
+    }
+
+    public String mountScript(){
+        String basic = "<script type=\"text/babel\">\n";
+        StringBuilder sb= new StringBuilder();
+        sb.append(basic);
+        sb.append("</script>");
+        return sb.toString();
+
+    };
+
+    public String DumpRequestToHTMLTableReact() throws SQLException, ParseException {
+        ArrayList<ArrayList> data = loadrequests8inmatrix();
+        System.out.println("SIZE::"+data.size());
+        StringBuilder sb = new StringBuilder();
+        sb.append("<tr>");
+        int number_row=data.size();
+        for (int i=0; i<data.size(); i++){
+            String result = String.valueOf(processRow(sb, data.get(i)));
+            int numbertag=number_row--;
+            sb.append("<td><div id=\"approvetag"+(numbertag)+"\"></div>  <script type=\"text/babel\">\n" +
+                    "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));" +
+                    "        </script>  </td><tr>");
+        };
         return sb.toString();
     }
 
