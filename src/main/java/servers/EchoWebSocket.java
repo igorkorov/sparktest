@@ -16,6 +16,7 @@ public class EchoWebSocket {
     public static Deps deps;
     @OnWebSocketConnect
     public void connected(Session session) {
+        System.out.println("Connceted: " );   // Print message
         sessions.add(session);
     }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<table border="1" cellpadding="7" cellspacing="0">
+<table id="myTable" border="1" cellpadding="7" cellspacing="0">
     <tr>
         <td colspan="2" bgcolor="#D3EDF6" align="center">Ячейка 1</td>
     </tr>
@@ -16,10 +16,27 @@
         <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
         <script type="text/babel">
             alert('test')
+
         </script>
         <td width="98%" valign="bottom">Ячейка 3</td>
     </tr>
 </table>
+<script>
+    var table = document.getElementById("myTable");
+    var row = table.insertRow(0);
+    var row2 = table.insertRow(1);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var row3 = table.insertRow(2);
+    var cell11 = row2.insertCell(0);
+    var cell21= row2.insertCell(1);
+    var cell12 = row3.insertCell(0);
+    var cell22 = row3.insertCell(1);
 
+// Add some text to the new cells:
+cell1.innerHTML = "NEW CELL1";
+cell2.innerHTML = "NEW CELL2";
+
+</script>
 </body>
 </html>

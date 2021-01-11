@@ -52,8 +52,34 @@ function addscript(scripted){
 localStorage.setItem('maxitem', 0);
 localStorage.setItem('minitem', 0);
 </script>
+<script>
+function clicked(){
 
-<table  border="10" cellpadding="10"  align="center" valign="center" class="table">
+    var table = document.getElementById("mTable");
+    var row = table.insertRow(1);
+
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
+    var cell6 = row.insertCell(5);
+    var cell7 = row.insertCell(6);
+    var cell8 = row.insertCell(7);
+    cell1.innerHTML = "NEW CELL1";
+    cell2.innerHTML = "NEW CELL2";
+    cell3.innerHTML = "NEW CELL1";
+    cell4.innerHTML = "NEW CELL2";
+    cell5.innerHTML = "NEW CELL1";
+    cell6.innerHTML = "NEW CELL2";
+    cell7.innerHTML = "NEW CELL1";
+    cell8.innerHTML = "NEW CELL2";
+    alert('clicked')
+}
+
+</script>
+<button onclick="clicked()">Emulate request</button>
+<table  id="mTable" border="10" cellpadding="10"  align="center" valign="center" class="table">
     <th class="text-center">ID</th>
     <th class="text-center">Дата запроса</th>
     <th class="text-center">Комментарий</th>
@@ -62,7 +88,9 @@ localStorage.setItem('minitem', 0);
     <th class="text-center">Измененная позиция</th>
     <th class="text-center">Дата изменения</th>
     <th class="text-center">Одобрить запрос</th>
+    <tbody>
     $requests
+    </tbody>
 </table>
 
 

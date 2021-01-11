@@ -18,3 +18,8 @@ ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Re
 
 
     Mount riot   prosps, opts
+
+NEED TEST WebSocket and React poages;
++async load requests;
+
+обязательно нужно лог8инитьсмя при работе с таблицей запросов
