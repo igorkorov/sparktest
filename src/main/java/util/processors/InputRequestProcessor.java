@@ -241,8 +241,8 @@ public class InputRequestProcessor {
             int numbertag=number_row--;
             sb.append("<td><div id=\"approvetag"+(numbertag)+"\"></div></td><tr>" +
                     " <script type=\"text/babel\">\n" +
-                    "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));" +
-                    "        </script>  ");
+                    "ReactDOM.hydrate(<Approve number='"+numbertag+"' status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));" +
+                    "         </script>  ");
   ///////       String dump = "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));\n" ;
   ///////       fos.write(dump.getBytes() );
         };

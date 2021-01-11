@@ -1,6 +1,14 @@
 class Approve extends React.Component {
+constructor(props) {
+    super(props);
+    this.state = { state: -1};
+}
+showMessage= () =>{
+    console.log( 'Всем привет!' );
+}
 approve= () =>
       {
+      this.setState({ state: 1 })
         function getXmlHttp()
         {
             var xmlhttp;
@@ -32,12 +40,13 @@ approve= () =>
             if (xhr.readyState != 4) return
             clearTimeout(xhrTimeout)
             if (xhr.status == 200) {
+
                 alert('ответ отправлен');
-                location.reload();
+  /////////////              location.reload();
             }
             if (xhr.status == 500) {
                 alert('ответ отправлен');
-                location.reload();
+ ////////////               location.reload();
             }
         }
 
@@ -53,6 +62,8 @@ approve= () =>
 
 suppress= () =>
       {
+                              this.setState({ state: 0 })
+
         function getXmlHttp()
                 {
                     var xmlhttp;
@@ -85,7 +96,7 @@ suppress= () =>
                     clearTimeout(xhrTimeout)
                     if (xhr.status == 200) {
                         alert('ответ отправлен');
-                        location.reload();
+
                     }
                     if (xhr.status == 500) {
                         alert('ответ отправлен');
@@ -102,7 +113,35 @@ suppress= () =>
                 }
 
       }
+
+
     render() {
+        let minitem = Number(localStorage.getItem('minitem'));
+        let maxitem = Number(localStorage.getItem('maxitem'));
+        let number = Number(this.props.number)
+        if ((minitem == 0) && (maxitem == 0))
+        {
+            localStorage.setItem('minitem', this.props.number)
+            localStorage.setItem('maxitem', this.props.number)
+        }
+        else
+        {
+            if (number > maxitem)
+                localStorage.setItem('maxitem', number)
+            if (number < minitem)
+                localStorage.setItem('minitem', this.props.number)
+        }
+
+    if (this.state.state==1) {
+        return  (<div align='center'>
+        <h5 class="approved">Разрешено</h5>
+        </div>)
+    }
+    if (this.state.state==0) {
+        return  (<div align='center'>
+        <h5 class="declined">Запрещено</h5>
+        </div>)
+    }
     if (this.props.status=="SUSPENDING"){
         return  (<div align='center'>
         <button type="button"  class="btn btn-success" onClick={this.approve}>Разрешить </button><br/><br/>

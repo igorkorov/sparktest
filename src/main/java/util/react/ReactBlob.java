@@ -16,7 +16,7 @@ public class ReactBlob {
 
     public String blobScript(int i){
         String basic = "<script type=\"text/babel\">\n" +
-                "      ReactDOM.render(\n" +
+                "      ReactDOM.hydrate(\n" +
                 "        <h1>Hello, world!</h1>,\n" +
                 "        document.getElementById('root')\n" +
                 "      );\n";
@@ -31,7 +31,7 @@ public class ReactBlob {
         StringBuilder sb = new StringBuilder();
         for (int i=1; i<=j; i++)
             sb.append("      const domContainer"+i+" = document.querySelector('#like_button_container"+i+"');\n" +
-                    "      ReactDOM.render(e(LikeButton), domContainer"+i+");\n" );
+                    "      ReactDOM.hydrate(e(LikeButton), domContainer"+i+");\n" );
         return sb.toString();
 
     };

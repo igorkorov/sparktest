@@ -56,8 +56,8 @@ public class Spark {
 
         get("dyreact", (req, res) -> {
             model.clear();
-            model.put("dynoids", deps.react.blobId(500));
-            model.put("dymounts", deps.react.blobScript(500));
+            model.put("dynoids", deps.react.blobId(1000));
+            model.put("dymounts", deps.react.blobScript(1000));
             return new VelocityTemplateEngine().render(
                     new ModelAndView(model, "dyreact.html"));
         });
@@ -181,8 +181,10 @@ public class Spark {
             return eng.render(BAD);
         });
         get("/approve", (req,res)->{
-            if (check(req)){
+            System.out.print("1AAPPROVE \n\n\n");
+            if (check(req)){  /// <<update in prod
                 String id = req.queryParams("id");
+                System.out.print("AAPPROVE \n\n\n");
                 deps.orp.approve(id);
                 res.redirect("/requests");
 
@@ -222,9 +224,14 @@ public class Spark {
                 model.clear();
             ///    model.put("requests", deps.irp.DumpRequestToHTMLTable8());
             ///    System.out.println(deps.irp.DumpRequestToHTMLTable8());
-                model.put("requests", deps.irp.DumpRequestToHTMLTable8usingmatrixhardcoded());
+                model.clear();
+                model.put("requests", deps.irp.DumpRequestToHTMLTableReact());
                 return new VelocityTemplateEngine().render(
-                        new ModelAndView(model, "requests.html"));
+                        new ModelAndView(model, "requestsx.html"));
+
+           //     model.put("requests", deps.irp.DumpRequestToHTMLTable8usingmatrixhardcoded());
+           //     return new VelocityTemplateEngine().render(
+           //             new ModelAndView(model, "requests.html"));
             }
             else
                 req.session().attribute("logined", false);
