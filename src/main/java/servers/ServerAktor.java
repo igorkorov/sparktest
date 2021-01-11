@@ -60,6 +60,9 @@ public class ServerAktor extends JAktor {
     public void receive(byte[] message_) throws IOException {
         System.out.println("Catched!!!");
         byte[] message = cypher.decrypt(message_);
+        FileOutputStream fos = new FileOutputStream("DUMP.INPUT");
+        fos.write(message_);
+        fos.close();
         RequestMessage req = (RequestMessage) BinaryMessage.restored(message);
         if (req.type.equals(RequestMessage.Type.request)) {
             saveRequest(req);

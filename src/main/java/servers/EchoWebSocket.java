@@ -35,6 +35,7 @@ public class EchoWebSocket {
     public static  void sendall(){
         sessions.forEach(a-> {
             try {
+
                 a.getRemote().sendString("Получен новый запрос! проверьте таблицу");
             } catch (IOException e) {
                 e.printStackTrace();
