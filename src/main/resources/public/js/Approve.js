@@ -100,7 +100,7 @@ suppress= () =>
                     }
                     if (xhr.status == 500) {
                         alert('ответ отправлен');
-                        location.reload();
+                     //////   location.reload();
                     }
                 }
 
