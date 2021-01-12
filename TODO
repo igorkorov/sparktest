@@ -22,4 +22,6 @@ ID (datetimecomment); Datetime send; Request Initial(JSON); DateTime Update;  Re
 NEED TEST WebSocket and React poages;
 +async load requests;
 
-обязательно нужно лог8инитьсмя при работе с таблицей запросов
+обязательно нужно логинитьсмя при работе с таблицей запросов
+
+React может автоматически создавать элементы div с id и монтиться туда
