@@ -10,6 +10,7 @@ import org.json.simple.parser.ParseException;
 import servers.threadMessager.ThreadMessager;
 import util.JSON.Beatyfulizer;
 import util.IDHelper;
+import util.JSON.ParcedJSON;
 import util.processors.InputRequestProcessor;
 
 import java.io.*;
@@ -63,10 +64,12 @@ public class ServerAktor extends JAktor {
         FileOutputStream fos = new FileOutputStream("DUMP.INPUT");
         fos.write(message_);
         fos.close();
+
         RequestMessage req = (RequestMessage) BinaryMessage.restored(message);
+        sendWebsocketAlerts(req.ID);
         if (req.type.equals(RequestMessage.Type.request)) {
             saveRequest(req);
-            sendWebsocketAlerts();
+
             try {
                 saveinDB(req);
             } catch (SQLException throwables) {
@@ -90,6 +93,12 @@ public class ServerAktor extends JAktor {
 
 
     }
+
+    private void sendWebsocketAlerts(String id) {
+        EchoWebSocket.sendall(id);
+    }
+
+
 
     public void saveRequest(RequestMessage req) throws IOException {
         System.out.println("Save request");

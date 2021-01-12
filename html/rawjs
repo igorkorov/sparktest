@@ -1,0 +1,38 @@
+const json_db = [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":51,"datetimeapprove":"'null'"}];
+    // alert(json_db[0].initialdata);
+    function update(){
+        let index = 0
+        for (var key in json_db)
+            index++;
+         alert('counter=' + index )
+    }
+    let index12 = 0
+    for (var key in json_db){
+        let currentindex = json_db[0].id
+        if (currentindex>b){
+            var table = document.getElementById("table");
+            var row = table.insertRow(1);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+            var cell6 = row.insertCell(5);
+            var cell7 = row.insertCell(6);
+            var cell8 = row.insertCell(7);
+
+            cel11.innerHTML =  json_db[0].id
+            cell2.innerHTML =  json_db[0].datetimerequest
+            cell3.innerHTML = json_db[0].comment
+            cell4.innerHTML =  json_db[0].initialdata
+            cell5.innerHTML =  json_db[0].datetimeapprove
+            cell6.innerHTML = json_db[0].updateddata
+            cell7.innerHTML =  json_db[0].datetimeupdate
+            let g = cell8.createElement('div');
+            g.setAttribute("id", "approvetag"+currentindex);
+            let divid = "approvetag"+currentindex
+            alert('created!')
+            ReactDOM.render(<Approve number={currentindex}} status="APPROVED"/>, document.getElementById({divid}));
+        }
+        alert('counter=' + index12 )
+        index12++;

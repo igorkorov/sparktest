@@ -1,5 +1,7 @@
 package util.JSON;
 
+import Message.abstractions.BinaryMessage;
+import abstractions.RequestMessage;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -34,5 +36,17 @@ public class ParcedJSON {
         pj.Comment = (String) jo.get("Comment");
         return pj;
     };
+
+    public static String RequestMessage2JSON(byte[]  input__){
+        JSONObject obj = new JSONObject();
+        RequestMessage input = (RequestMessage) BinaryMessage.restored(input__);
+        obj.put("Address",input.addressToReply);
+        obj.put("Description",input.Description);
+        obj.put("ID",input.ID);
+        obj.put("JSON",input.JSONed);
+        obj.put("TimeStamp",input.TimeStamp);
+        obj.put("type",input.type);
+        return obj.toString();
+    }
 
 }

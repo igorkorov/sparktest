@@ -7,6 +7,7 @@ import servers.EchoWebSocket;
 import servers.ServerAktor;
 import util.DB.DataBaseHelper;
 import util.DB.ProductionUPDATE;
+import util.JSON.LoaderJSON;
 import util.processors.InputRequestProcessor;
 import util.processors.OutputResponceProcessor;
 import util.react.ReactBlob;
@@ -35,6 +36,7 @@ public class Deps {
     public DataBaseHelper requests;
     public DataBaseHelper users;
     public ProductionUPDATE prod;
+    public LoaderJSON LoaderJSON;
     public ReactBlob react = new ReactBlob();
     private abstractions.Settings setts;
 
@@ -50,6 +52,7 @@ public class Deps {
             prod.init();
         }
         requests = new DataBaseHelper(setts.requestsPOSTGRESConnect, true);//requests = new DataBaseHelper("requests");
+        LoaderJSON =  new LoaderJSON(requests.executor);
         users = new DataBaseHelper(setts.usersPostgresConnect, true);
        // Settings = new Readfile(fileprops);
         Incomming = new Readfile(incomingFolder);
