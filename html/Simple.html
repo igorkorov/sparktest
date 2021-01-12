@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <!-- Не используйте это в production -->
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+
+
+
+    <!-- jQuery and JS bundle w/ Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+</head>
+<script type="text/babel"  src="js/Simple.js"></script>
+<div id="Simple"></div>
+<script type="text/babel">
+
+    var p = document.createElement("div");
+    const info = {number:555, status:'SUSPENDING'};
+    p.setAttribute("id", info.number);
+    const domContainerR = document.querySelector("Simple");
+    domContainerR.appendChild(p);
+    const domContainer = document.querySelector(info.number);
+    alert('created!')
+    ReactDOM.render(React.createElement(Approve, {number: currentindex, status:"APPROVED"}, null),
+        domContainerR);
+    ReactDOM.render(<Approve info={info} />, domContainerR);
+    ReactDOM.render(<Simple number='555'/>, document.getElementById('Simple'));
+</script>
+<body>
+
+</body>
+</html>

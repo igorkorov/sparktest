@@ -32,7 +32,7 @@ approve= () =>
         }
 
         var xhr = getXmlHttp()
-        var params= this.props.number ;
+        var params= this.props.info.number  ;
         var request = "/approve?id="+params;
         xhr.open("GET", request, true);
         xhr.onreadystatechange=function()
@@ -87,7 +87,7 @@ suppress= () =>
                 }
 
                 var xhr = getXmlHttp()
-                var params= this.props.number ;
+                var params= this.props.info.number ;
                 var request = "/decline?id="+params;
                 xhr.open("GET", request, true);
                 xhr.onreadystatechange=function()
@@ -142,18 +142,18 @@ suppress= () =>
         <h5 class="declined">Запрещено</h5>
         </div>)
     }
-    if (this.props.status=="SUSPENDING"){
+    if (this.props.info.status=="SUSPENDING"){
         return  (<div align='center'>
         <button type="button"  class="btn btn-success" onClick={this.approve}>Разрешить </button><br/><br/>
         <button type="button"  class="btn btn-danger" onClick={this.suppress}>Запретить''</button>
         </div>)
     }
-    if (this.props.status=="DECLINED"){
+    if (this.props.info.status=="DECLINED"){
         return  (<div align='center'>
         <h5 class="declined">Запрещено</h5>
         </div>)
     }
-    if (this.props.status=="APPROVED"){
+    if (this.props.info.status=="APPROVED"){
          return  (<div align='center'>
          <h5 class="approved">Разрешено</h5>
          </div>)

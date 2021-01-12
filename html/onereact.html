@@ -89,6 +89,11 @@ function addscript(scripted){
     let b = localStorage.getItem('maxitem');
     alert(a+";"+b)
 
+    function simple(a){
+        alert(a+55)
+    }
+
+    simple('test simple')
 
     const json_db = [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":51,"datetimeapprove":"'null'"}];
     // alert(json_db[0].initialdata);
@@ -115,13 +120,15 @@ function addscript(scripted){
     cell1.innerHTML =  json_db[0].id
     var p = document.createElement("div");
     let divid = "approvetag"+currentindex
-    p.setAttribute("id", divid);
+    const info = {number:currentindex, status:'SUSPENDING'};
+    p.setAttribute("id", info.number);
     cell8.appendChild(p);
-    const domContainerR = document.querySelector(divid);
-
+    const domContainerR = document.querySelector(info.number);
+    const info = {number:currentindex, status:'SUSPENDING'};
     alert('created!')
     ReactDOM.render(React.createElement(Approve, {number: currentindex, status:"APPROVED"}, null),
         domContainerR);
+    ReactDOM.render(<Approve info={info} />, domContainerR);
 
 
 </script>

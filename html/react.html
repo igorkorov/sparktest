@@ -19,14 +19,19 @@
 <script src="js/like_button.js"></script>
 <script type="text/babel" src="js/ButtonA.js"></script>
 <script type="text/babel" src="js/C12.js"></script>
+<script type="text/babel" src="js/Simple.js"></script>
 <h1>React test</h1>
 <div id="root"><h1>Root area</h1></div>
 <div id="C12"></div>
 <div id="A"></div>
+<div id="Simple"></div>
 <button onclick="creatediv()">testDOM</button>
 <button onclick="createdivR()">throwReact</button>
 <button onclick="add()">test</button>
+<button onclick="add__(12)">create react</button>
 <script type="text/babel">
+    ReactDOM.render(<Simple number=555/>, document.getElementById('Simple'));
+
     function add(){
         ReactDOM.render(        <h1>Hello, world!</h1>,        document.getElementById('root')      );
         const domContainer = document.querySelector('#like_button_container');
@@ -34,7 +39,16 @@
         ReactDOM.render(<C12/>, document.getElementById('C12'));
         ReactDOM.render(<ButtonA/>, document.getElementById('A'));
     }
-
+    function add__(x)
+    {
+        var table = document.getElementById("root");
+        const newDiv = document.createElement("div");
+        newDiv.setAttribute("id", x);
+        const root1 = document.getElementById("root");
+        root1.appendChild(newDiv);
+        //document.body.insertBefore(newDiv, root1);
+        ReactDOM.render(<h3>Dinamical rendered!</h3>, document.getElementById(x));
+    }
     function creatediv(){
         var root2 = document.document.querySelector('root');
         g = root2.createElement('div');
