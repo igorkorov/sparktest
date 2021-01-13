@@ -31,11 +31,11 @@ public class LoaderJSON {
             System.out.println("ID::>>"+select.getObject("counter"));
             JSONObject rowJSON = new JSONObject();
             rowJSON.put("id", select.getObject("counter"));
-            rowJSON.put("datetimerequest", select.getObject("datetimerequest"));
+            rowJSON.put("datetimerequest", "'"+select.getObject("datetimerequest")+"'");
             rowJSON.put("initialdata", select.getObject("initialdata"));
-            rowJSON.put("datetimeupdate", select.getObject("datetimeupdate"));
+            rowJSON.put("datetimeupdate", "'"+select.getObject("datetimeupdate")+"'");
             rowJSON.put("updateddata", select.getObject("updateddata"));
-            rowJSON.put("datetimeapprove", select.getObject("datetimeapprove"));
+            rowJSON.put("datetimeapprove", "'"+select.getObject("datetimeapprove")+"'");
             rowJSON.put("comment", select.getObject("comment"));
             list.add(rowJSON);
         }
@@ -53,9 +53,9 @@ public class LoaderJSON {
             System.out.println("ID::>>"+select.getObject("counter"));
             rowJSON.put("id", select.getObject("counter"));
             rowJSON.put("datetimerequest", "'"+select.getObject("datetimerequest")+"'");
-            rowJSON.put("initialdata", "'"+select.getObject("initialdata")+"'");
+            rowJSON.put("initialdata", select.getObject("initialdata"));
             rowJSON.put("datetimeupdate", "'"+select.getObject("datetimeupdate")+"'");
-            rowJSON.put("updateddata", "'"+select.getObject("updateddata")+"'");
+            rowJSON.put("updateddata", select.getObject("updateddata"));
             rowJSON.put("datetimeapprove", "'"+select.getObject("datetimeapprove")+"'");
             rowJSON.put("comment", select.getObject("comment"));
             list.add(rowJSON);

@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
 
 public class LoaderJSONTest {
     public String binprops = "setts.bin";
+    public String declinedid = "2020-12-1513:56:33ошщ";
     private abstractions.Settings setts  = (abstractions.Settings) BinaryMessage.restored(BinaryMessage.readBytes(binprops));
     DataBaseHelper requests = new DataBaseHelper(setts.requestsPOSTGRESConnect, true);//requests = new DataBaseHelper("requests");
 
@@ -28,6 +29,15 @@ public class LoaderJSONTest {
         System.out.println(loader.LoadResult2JSONOne("2020-11-0316:18:04витек"));
         FileOutputStream fos = new FileOutputStream("JSON.DUMP");
         fos.write(loader.LoadResult2JSON("2020-11-0316:18:04витек").getBytes());
+        fos.close();
+    }
+
+    @Test
+    public void loadResult2JSON_declined() throws SQLException, IOException {
+        assertNotEquals(null, loader.LoadResult2JSONOne(declinedid));
+        System.out.println(loader.LoadResult2JSONOne("2020-11-0316:18:04витек"));
+        FileOutputStream fos = new FileOutputStream("JSON.DUMP.DECLINED");
+        fos.write(loader.LoadResult2JSON(declinedid).getBytes());
         fos.close();
     }
 }

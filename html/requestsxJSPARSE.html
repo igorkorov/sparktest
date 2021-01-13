@@ -52,44 +52,155 @@ function addscript(scripted){
 localStorage.setItem('maxitem', 0);
 localStorage.setItem('minitem', 0);
 </script>
-<script type="text/babel">
-    const json__ =   [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":317,"datetimeapprove":"'null'"}];
-    const simple__ = [{'id':13}, {'id':14}]
 
-    function proccessJSON(q){
-        for (var item in q)
-            alert(q[item].id);
-    }
-
-    function clicked(){
-        alert('there works')
-        proccessJSON(json__)
-    }
-
-    clicked()
-
-</script>
 <button onClick="clicked()">Emulate request</button>
-<table  id="mTable" border="10" cellpadding="10"  align="center" valign="center" class="table">
-    <th class="text-center">ID</th>
-    <th class="text-center">Дата запроса</th>
-    <th class="text-center">Комментарий</th>
-    <th class="text-center">Позиция</th>
-    <th class="text-center">Дата разрешения /запрешения</th>
-    <th class="text-center">Измененная позиция</th>
-    <th class="text-center">Дата изменения</th>
-    <th class="text-center">Одобрить запрос</th>
-    <tbody>
-    $requests
-    </tbody>
+<button onclick="clicked()">Emulate request</button>
+<table id="mTable" valign="center" class="table" cellpadding="10" border="10" align="center">
+    <tr><th class="text-center">ID</th>
+        <th class="text-center">Дата запроса</th>
+        <th class="text-center">Комментарий</th>
+        <th class="text-center">Позиция</th>
+        <th class="text-center">Дата разрешения /запрешения</th>
+        <th class="text-center">Измененная позиция</th>
+        <th class="text-center">Дата изменения</th>
+        <th class="text-center">Одобрить запрос</th>
+    </tr>
+    <tbody align="right" id="tbody">
+<tr id="317"><td align="center"><div id="3170">317</div></td><td align="center"><div id="3171">2021-01-12 13:59:48.627</div></td><td align="center"><div id="3172">wfwefwfewfw</div></td><td align="center"><div id="3173"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p>Металл: Алюминий хлам<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3174">2021-01-13 12:27:26.255</div></td><td align="center"><div id="3175"></div></td><td><div id="3176"></div></td><td><div id="approvetag317"><div align="center"><h5 class="approved">Разрешено</h5></div></div></td></tr><tr> </tr>
+<tr id="316"><td align="center"><div id="3160">316</div></td><td align="center"><div id="3161">2021-01-12 13:57:46.715</div></td><td align="center"><div id="3162">dfgfdgfdgfdgfdgd</div></td><td align="center"><div id="3163"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p>Металл: Алюминий хлам<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3164">2021-01-13 12:27:26.255</div></td><td align="center"><div id="3165"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p style="background-color: yellow;">Металл: Бабит 16%<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3166">2021-01-12 13:58:29.418</div></td><td><div id="approvetag316"><div align="center"><h5 class="approved">Разрешено</h5></div></div></td></tr>
+<tr id="315"><td align="center"><div id="3150">315</div></td><td align="center"><div id="3151">2021-01-11 17:58:05.767</div></td><td align="center"><div id="3152">initial</div></td><td align="center"><div id="3153"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p>Металл: Алюминий хлам<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3154">2021-01-13 12:27:26.255</div></td><td align="center"><div id="3155"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p style="background-color: yellow;">Металл: Бабит 16%<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3156">2021-01-12 13:58:29.418</div></td><td><div id="approvetag315"><div align="center"><h5 class="approved">Разрешено</h5></div></div></td></tr>
+<tr id="314"><td align="center"><div id="3140">314</div></td><td align="center"><div id="3141">2021-01-11 16:47:45.93</div></td><td align="center"><div id="3142">sdfdsdfsdsfsd</div></td><td align="center"><div id="3143"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p>Металл: Алюминий хлам<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3144">2021-01-13 12:27:26.255</div></td><td align="center"><div id="3145"><p>Дата: 2020-11-03<br></p><p>Время: 16:18:04<br></p><p>Номер накладной: 15<br></p><p style="background-color: yellow;">Металл: Бабит 16%<br></p><p>Тара: 0.0<br></p><p>Нетто: 287.60<br></p><p>Брутто: 294.5<br></p><p>Засор: 1.0<br></p><p>Примесь: 4.0<br></p><p>Комментарий: витек<br></p></div></td><td align="center"><div id="3146">2021-01-12 13:58:29.418</div></td><td><div id="approvetag314"><div align="center"><h5 class="approved">Разрешено</h5></div></div></td></tr>
+    <tbody align="right">
 </table>
-
-
 <script type="text/babel">
 let a = localStorage.getItem('minitem');
 let b = localStorage.getItem('maxitem');
 //alert(a+":"+b)
 </script>
+<script type="text/babel">
+    const json__ =   [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":318,"datetimeapprove":"'null'"}];
+    const simple__ = [{'id':13}, {'id':14}]
+    const declined__ = [{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:40:17.2'","comment":"5464565464","id":274,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:43:22.949'","comment":"hdfdhdxhfdxhdfxh","id":276,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "3.0", "Time": "13:56:33", "Netto": "203.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "12А", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-15 15:25:49.042'","comment":"vdsvsdvdsvsv","id":169,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-18 15:29:53.097'","comment":"879797898778998797","id":249,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий пищевой", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:37:36.278'","comment":"ers54waetg","id":400,"datetimeapprove":"'2020-12-21 15:43:27.324'"}]
+    const extracted__ = {"Date":"2020-12-15","Mode":"Приемка","Tara":"0.0","Time":"13:56:33","Netto":"206.70","Trash":"0.0","Brutto":"206.7","Metall":"Алюминий пищевой","Comment":"ошщ","Clogging":"0.0","Complete":"Нет","Condition":"Не выгружен","Waybill_number":"4"}
+ ///   alert('extracted=>'+extracted__.Date)
+    localStorage.setItem('maxitem', 317);
 
+    var obj_____ = declined__[0].initialdata.Date;
+   // alert('obj==>'+obj_____)
+    var declined_obj_updateddata = declined__[0].updateddata
+  //  alert('length=>'+JSON.stringify(declined_obj_updateddata).length)
+
+    function proccessJSON(q){
+        let maxitem = localStorage.getItem('maxitem');
+   //     alert(maxitem)
+        for (var item in q)
+            var id  = (q[item].id);
+            if (maxitem<id)
+                createRow(q[item])
+            else
+                updateRow(q[item])
+    }
+
+    function createRow(a){
+        var table = document.getElementById("mTable");
+        var row = table.insertRow(1);
+        var tbdy = document.getElementById('tbody');
+        var tr = document.createElement('tr');
+        var counter = String(a.id)
+        tr.setAttribute("id", counter);
+        for (var j = 0; j < 7; j++)
+        {
+            var td = document.createElement('td');
+            td.setAttribute("align", "center");
+            var div = document.createElement("div");
+            var id = counter+j
+            console.log(id)
+            div.setAttribute("id", id);
+            td.appendChild(div)
+            tr.appendChild(td)
+        }
+        var td = document.createElement('td');
+        var div = document.createElement("div");
+        var id = 'approvetag'+counter
+        div.setAttribute("id", id);
+        td.setAttribute("align", "center");
+        td.appendChild(div)
+        tr.appendChild(td)
+        tbdy.prepend(tr);
+        var status___ = processRow(a)
+        const json__ = {'number': a.id, 'status': status___};
+        ReactDOM.render(<Approve info={json__}/>, document.getElementById(id));
+        fillRow(a)
+    }
+
+    function flow(a222)
+    {
+        if (a222 == "'null'")
+            return '';
+        return a222;
+    }
+
+    function schoneJSON(input){
+        if (input==null)
+            return "";
+        if (input.a ==0)
+            return '';
+        var result="";
+        result+="<p>Дата: "+ input.Date +   "<br>";
+        result+="<p>Время: "+ input.Time +   "<br>";
+        result+="<p>Номер накладной: "+ input.Waybill_number +    "<br>";
+        result+="<p>Металл: "+ input.Metall +    "<br>";
+        result+="<p>Тара: "+ input.Tara +    "<br>";
+        result+="<p>Нетто: "+ input.Netto +   "<br>";
+        result+="<p>Брутто: "+ input.Brutto +   "<br>";
+        result+="<p>Засор: "+ input.Clogging +   "<br>";
+        result+="<p>Примесь: "+ input.Trash +   "<br>";
+        result+="<p>Комментарий: "+ input.Comment +   "<br>";
+
+        return result
+    }
+
+    function fillRow(a)
+    {
+       let index____ = String(a.id)
+       var id = document.getElementById(index____+0);
+       var datetimerequest = document.getElementById(index____+1);
+       var comment = document.getElementById(index____+2);
+       var initialdata = document.getElementById(index____+3);
+       var datetimeapprove = document.getElementById(index____+4);
+       var updateddata = document.getElementById(index____+5);
+       var datetimeupdate = document.getElementById(index____+6);
+       id.innerHTML =flow( a.id)
+       datetimerequest.innerHTML =flow( a.datetimerequest)
+       comment.innerHTML =flow( a.comment)
+       initialdata.innerHTML = schoneJSON(flow(a.initialdata))
+       datetimeapprove.innerHTML =flow( a.datetimeapprove)
+       updateddata.innerHTML = schoneJSON(flow(a.updateddata))
+       datetimeupdate.innerHTML =flow( a.datetimeupdate)
+    }
+
+    function processRow(a22)
+    {
+        if (JSON.stringify(a22.updateddata).length==9)
+            return 'DECLINED'
+        if (JSON.stringify(a22.updateddata).length>9)
+            return 'APPROVED'
+        return 'SUSPENDING'
+    };
+
+
+    function updateRow(a){
+        alert('update row')
+    }
+
+
+    function clicked(){
+    //    alert('there works')
+        proccessJSON(declined__)
+    }
+
+
+
+</script>
 </body>
 </html>

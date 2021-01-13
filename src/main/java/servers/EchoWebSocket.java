@@ -32,7 +32,7 @@ public class EchoWebSocket {
 
     @OnWebSocketConnect
     public void connected(Session session) {
-        System.out.println("Connceted: " );   // Print message
+     //   System.out.println("Connceted: " );   // Print message
         sessions.add(session);
     }
 
