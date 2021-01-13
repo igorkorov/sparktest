@@ -178,7 +178,15 @@ let b = localStorage.getItem('maxitem');
             alert('catched!')
             return schoneJSON(input);
         }
-        return schoneJSON(input)
+        var div = document.createElement("div");
+        var p1 = document.createElement("p");
+        p1.innerHTML = input.Date
+        if (input.Date != compare.Date)
+            p1.setAttribute("style", 'background-color: yellow');
+        div.appendChild(p1);
+
+
+        return div;
     }
     function fillRow(a)
     {
@@ -195,7 +203,7 @@ let b = localStorage.getItem('maxitem');
        comment.innerHTML =flow( a.comment)
        initialdata.innerHTML = schoneJSON(flow(a.initialdata))
        datetimeapprove.innerHTML =flow( a.datetimeapprove)
-       updateddata.innerHTML = compareundschoneJSON(flow(a.updateddata), flow(a.initialdata))
+       updateddata.appendChild(compareundschoneJSON(flow(a.updateddata), flow(a.initialdata)))
        datetimeupdate.innerHTML =flow( a.datetimeupdate)
     }
 
