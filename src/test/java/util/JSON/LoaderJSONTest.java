@@ -30,6 +30,9 @@ public class LoaderJSONTest {
         FileOutputStream fos = new FileOutputStream("JSON.DUMP");
         fos.write(loader.LoadResult2JSON("2020-11-0316:18:04витек").getBytes());
         fos.close();
+        FileOutputStream fos2 = new FileOutputStream("JSON.DUMP.ONEUPDATED");
+        fos2.write(loader.LoadResult2JSON("2020-11-0316:18:04витек").getBytes());
+        fos2.close();
     }
 
     @Test
