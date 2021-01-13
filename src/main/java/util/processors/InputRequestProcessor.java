@@ -188,23 +188,60 @@ public class InputRequestProcessor {
         String initialJSON = Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))));
         if (!result.equals(Condition.DECLINED))
             savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
-        sb.append("<td  align=\"center\">"+data.get(0)+"</td>");
-        sb.append("<td align=\"center\">"+data.get(1)+"</td>");
-        sb.append("<td align=\"center\">"+data.get(2)+"</td>");
-        sb.append("<td align=\"center\">"+initialJSON+ "</td>");
+        int counter = (int) data.get(0);
+        sb.append("<tr>");
+        sb.append("<td align=\"center\"><div id='"+counter+"0'>"+data.get(0)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"1'>"+data.get(1)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"2'>"+data.get(2)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"3'>"+initialJSON+"</div></td>");
         if (data.get(4)==null)
-            sb.append("<td>"+"</td>");
+            sb.append("<td><div id='"+counter+"4'>"+"</div></td>");
         else
-            sb.append("<td align=\"center\">"+data.get(4)+"</td>");
-        sb.append("<td align=\"center\">"+savedJSON+ "</td>");
+            sb.append("<td align=\"center\"><div id='"+counter+"4'>"+data.get(4)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"5'>"+savedJSON+ "</div></td>");
         if (data.get(6)==null){
-            sb.append("<td>"+"</td>");
+            sb.append("<td><div id='"+counter+"6'>"+"</div></td>");
         }
         else
-            sb.append("<td align=\"center\">"+data.get(6)+"</td>");
+            sb.append("<td align=\"center\"><div id='"+counter+"6'>"+data.get(6)+"</div></td>");
         return result;
 
     };
+
+    public Condition processRow(StringBuilder sb, ArrayList data, int numberrow) throws ParseException {
+        String savedJS = String.valueOf(data.get(5));
+        Condition result=Condition.SUSPENDING;
+        if (data.get(4)!=null){
+            if (savedJS.length()==10) //&& savedJS.length()<5)
+                result = Condition.DECLINED;
+            else
+                result = Condition.APPROVED;
+
+        }
+        String savedJSON="";
+        String initialJSON = Beatyfulizer.schoneJSON(ParcedJSON.parse(String.valueOf(data.get(3))));
+        if (!result.equals(Condition.DECLINED))
+            savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
+        int counter = (int) data.get(0);
+        sb.append("<tr id=\""+numberrow+"\">");
+        sb.append("<td align=\"center\"><div id='"+counter+"0'>"+data.get(0)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"1'>"+data.get(1)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"2'>"+data.get(2)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"3'>"+initialJSON+"</div></td>");
+        if (data.get(4)==null)
+            sb.append("<td><div id='"+counter+"4'>"+"</div></td>");
+        else
+            sb.append("<td align=\"center\"><div id='"+counter+"4'>"+data.get(4)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"5'>"+savedJSON+ "</div></td>");
+        if (data.get(6)==null){
+            sb.append("<td><div id='"+counter+"6'>"+"</div></td>");
+        }
+        else
+            sb.append("<td align=\"center\"><div id='"+counter+"6'>"+data.get(6)+"</div></td>");
+        return result;
+
+    };
+
 
     public String DumpRequestToHTMLTable8usingmatrixhardcoded() throws SQLException, ParseException {
         ArrayList<ArrayList> data = loadrequests8inmatrix();
@@ -234,15 +271,15 @@ public class InputRequestProcessor {
         ArrayList<ArrayList> data = loadrequests8inmatrix();
         System.out.println("SIZE::"+data.size());
         StringBuilder sb = new StringBuilder();
-        sb.append("<tr>");
+
         int number_row=data.size();
         for (int i=0; i<data.size(); i++){
-            String result = String.valueOf(processRow(sb, data.get(i)));
+            String result = String.valueOf(processRow(sb, data.get(i), number_row));
             int numbertag=number_row--;
             sb.append("<td><div id=\"approvetag"+(numbertag)+"\"></div></td><tr>" +
                     " <script type=\"text/babel\">\n" +
-                    "ReactDOM.hydrate(<Approve number='"+numbertag+"' status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));" +
-                    "         </script>  ");
+                    "const json__={'number':"+numbertag+", 'status':'"+result+"'}; ReactDOM.hydrate(<Approve info={json__}/>, document.getElementById('approvetag"+numbertag+"'));" +
+                    "         </script></tr>  ");
   ///////       String dump = "ReactDOM.render(<Approve number=\""+numbertag+"\" status=\""+result+"\"/>, document.getElementById('approvetag"+numbertag+"'));\n" ;
   ///////       fos.write(dump.getBytes() );
         };
