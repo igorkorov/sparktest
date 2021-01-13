@@ -53,8 +53,8 @@ localStorage.setItem('maxitem', 0);
 localStorage.setItem('minitem', 0);
 </script>
 
-<button onClick="clicked()">Emulate request</button>
-<button onclick="clicked()">Emulate request</button>
+<button onClick="clickedNew()">Emulate new</button>
+<button onClick="clickedUpdate()">Emulate exist</button>
 <table id="mTable" valign="center" class="table" cellpadding="10" border="10" align="center">
     <tr><th class="text-center">ID</th>
         <th class="text-center">Дата запроса</th>
@@ -81,6 +81,8 @@ let b = localStorage.getItem('maxitem');
     const json__ =   [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":318,"datetimeapprove":"'null'"}];
     const simple__ = [{'id':13}, {'id':14}]
     const declined__ = [{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:40:17.2'","comment":"5464565464","id":274,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:43:22.949'","comment":"hdfdhdxhfdxhdfxh","id":276,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "3.0", "Time": "13:56:33", "Netto": "203.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "12А", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-15 15:25:49.042'","comment":"vdsvsdvdsvsv","id":169,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-18 15:29:53.097'","comment":"879797898778998797","id":249,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий пищевой", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:37:36.278'","comment":"ers54waetg","id":400,"datetimeapprove":"'2020-12-21 15:43:27.324'"}]
+    const exist__ = [{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:40:17.2'","comment":"5464565464","id":274,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:43:22.949'","comment":"hdfdhdxhfdxhdfxh","id":276,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "3.0", "Time": "13:56:33", "Netto": "203.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "12А", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-15 15:25:49.042'","comment":"vdsvsdvdsvsv","id":169,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'2020-12-18 15:30:10.563'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий электротех", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-18 15:29:53.097'","comment":"879797898778998797","id":249,"datetimeapprove":"'2020-12-21 15:43:27.324'"},{"datetimeupdate":"'null'","initialdata":{"Date": "2020-12-15", "Mode": "Приемка", "Tara": "0.0", "Time": "13:56:33", "Netto": "206.70", "Trash": "0.0", "Brutto": "206.7", "Metall": "Алюминий пищевой", "Comment": "ошщ", "Clogging": "0.0", "Complete": "Нет", "Condition": "Не выгружен", "Waybill_number": "4"},"updateddata":{"a": "0"},"datetimerequest":"'2020-12-21 15:37:36.278'","comment":"ers54waetg","id":317,"datetimeapprove":"'2020-12-21 15:43:27.324'"}]
+
     const extracted__ = {"Date":"2020-12-15","Mode":"Приемка","Tara":"0.0","Time":"13:56:33","Netto":"206.70","Trash":"0.0","Brutto":"206.7","Metall":"Алюминий пищевой","Comment":"ошщ","Clogging":"0.0","Complete":"Нет","Condition":"Не выгружен","Waybill_number":"4"}
  ///   alert('extracted=>'+extracted__.Date)
     localStorage.setItem('maxitem', 317);
@@ -95,42 +97,49 @@ let b = localStorage.getItem('maxitem');
    //     alert(maxitem)
         for (var item in q)
             var id  = (q[item].id);
-            if (maxitem<id)
+          ////  //if (maxitem<id)
                 createRow(q[item])
-            else
-                updateRow(q[item])
+           ///// else
+           ///////     updateRow(q[item])
     }
 
     function createRow(a){
-        var table = document.getElementById("mTable");
-        var row = table.insertRow(1);
-        var tbdy = document.getElementById('tbody');
-        var tr = document.createElement('tr');
         var counter = String(a.id)
-        tr.setAttribute("id", counter);
-        for (var j = 0; j < 7; j++)
+   ///     alert('counter'+counter)
+    ////    alert(document.getElementById(counter))
+        if (document.getElementById(counter)==null)
         {
+
+            var table = document.getElementById("mTable");
+            var row = table.insertRow(1);
+            var tbdy = document.getElementById('tbody');
+            var tr = document.createElement('tr');
+            tr.setAttribute("id", counter);
+            for (var j = 0; j < 7; j++)
+            {
+                var td = document.createElement('td');
+                td.setAttribute("align", "center");
+                var div = document.createElement("div");
+                var id = counter+j
+                console.log(id)
+                div.setAttribute("id", id);
+                td.appendChild(div)
+                tr.appendChild(td)
+            }
             var td = document.createElement('td');
-            td.setAttribute("align", "center");
             var div = document.createElement("div");
-            var id = counter+j
-            console.log(id)
+            var id = 'approvetag'+counter
             div.setAttribute("id", id);
+            td.setAttribute("align", "center");
             td.appendChild(div)
             tr.appendChild(td)
+            tbdy.prepend(tr);
         }
-        var td = document.createElement('td');
-        var div = document.createElement("div");
         var id = 'approvetag'+counter
-        div.setAttribute("id", id);
-        td.setAttribute("align", "center");
-        td.appendChild(div)
-        tr.appendChild(td)
-        tbdy.prepend(tr);
         var status___ = processRow(a)
         const json__ = {'number': a.id, 'status': status___};
         ReactDOM.render(<Approve info={json__}/>, document.getElementById(id));
-        fillRow(a)
+
     }
 
     function flow(a222)
@@ -156,10 +165,65 @@ let b = localStorage.getItem('maxitem');
         result+="<p>Засор: "+ input.Clogging +   "<br>";
         result+="<p>Примесь: "+ input.Trash +   "<br>";
         result+="<p>Комментарий: "+ input.Comment +   "<br>";
-
         return result
     }
 
+    function compareundschoneJSON(input, compare)
+    {
+        if ((input==null) || (compare==null) )
+            return schoneJSON(input);
+        var result=""
+        if ((input.Date ==null) || (input.Date==(compare.Date)))
+            result+="<p>Дата: "+ input.Date +   "<br>";
+        else
+            result.append("<p"+ styleinject +">Дата: "+ input.Date +   "<br>");
+
+        if ((input.Time ==null) || input.Time.equals(compare.Time))
+            result.append("<p>Время: "+ input.Time +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Время: "+ input.Time +   "<br>");
+
+        if ((input.Waybill_number ==null) || input.Waybill_number.equals(compare.Waybill_number))
+            result.append("<p>Номер накладной: "+ input.Waybill_number +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Номер накладной: "+ input.Waybill_number +   "<br>");
+
+        if ((input.Metall ==null) || input.Metall.equals(compare.Metall))
+            result.append("<p>Металл: "+ input.Metall +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Металл: "+ input.Metall +   "<br>");
+
+        if ((input.Tara ==null) || input.Tara.equals(compare.Tara))
+            result.append("<p>Тара: "+ input.Tara +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Тара: "+ input.Tara +   "<br>");
+
+
+        if ((input.Netto ==null) || input.Netto.equals(compare.Netto))
+            result.append("<p>Нетто: "+ input.Netto +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Нетто: "+ input.Netto +   "<br>");
+
+        if ((input.Brutto ==null) || input.Brutto.equals(compare.Brutto))
+            result.append("<p>Брутто: "+ input.Brutto +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Брутто: "+ input.Brutto +   "<br>");
+
+        if ((input.Clogging ==null) || input.Clogging.equals(compare.Clogging))
+            result.append("<p>Засор: "+ input.Clogging +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Засор: "+ input.Clogging +   "<br>");
+
+        if ((input.Trash ==null) || input.Trash.equals(compare.Trash))
+            result.append("<p>Примесь: "+ input.Trash +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Примесь: "+ input.Trash +   "<br>");
+
+        if ((input.Comment ==null) || input.Comment.equals(compare.Comment))
+            result.append("<p>Комментарий: "+ input.Comment +   "<br>");
+        else
+            result.append("<p"+ styleinject +">Комментарий: "+ input.Comment +   "<br>");
+    }
     function fillRow(a)
     {
        let index____ = String(a.id)
@@ -175,17 +239,19 @@ let b = localStorage.getItem('maxitem');
        comment.innerHTML =flow( a.comment)
        initialdata.innerHTML = schoneJSON(flow(a.initialdata))
        datetimeapprove.innerHTML =flow( a.datetimeapprove)
-       updateddata.innerHTML = schoneJSON(flow(a.updateddata))
+       updateddata.innerHTML = compareundschoneJSON(flow(a.updateddata), flow(a.initialdata))
        datetimeupdate.innerHTML =flow( a.datetimeupdate)
     }
 
     function processRow(a22)
     {
+        fillRow(a22)
         if (JSON.stringify(a22.updateddata).length==9)
             return 'DECLINED'
         if (JSON.stringify(a22.updateddata).length>9)
             return 'APPROVED'
         return 'SUSPENDING'
+
     };
 
 
@@ -194,11 +260,14 @@ let b = localStorage.getItem('maxitem');
     }
 
 
-    function clicked(){
+    function clickedNew(){
     //    alert('there works')
         proccessJSON(declined__)
     }
-
+    function clickedUpdate(){
+    //    alert('there works')
+        proccessJSON(exist__)
+    }
 
 
 </script>
