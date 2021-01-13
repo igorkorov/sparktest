@@ -54,13 +54,11 @@ localStorage.setItem('minitem', 0);
 </script>
 <script type="text/babel">
     const json__ =   [{"datetimeupdate":"'null'","initialdata":"'{\"Date\": \"2020-11-03\", \"Mode\": \"Приемка\", \"Tara\": \"0.0\", \"Time\": \"16:18:04\", \"Netto\": \"287.60\", \"Trash\": \"4.0\", \"Brutto\": \"294.5\", \"Metall\": \"Алюминий хлам\", \"Comment\": \"витек\", \"Clogging\": \"1.0\", \"Complete\": \"Да\", \"Condition\": \"Выгружен\", \"Waybill_number\": \"15\"}'","updateddata":"'null'","datetimerequest":"'2021-01-12 13:59:48.627'","comment":"wfwefwfewfw","id":317,"datetimeapprove":"'null'"}];
-    const simple__ = {{"id":12}, {"id":13}}
-
+    const simple__ = [{'id':13}, {'id':14}]
 
     function proccessJSON(q){
-    var obj = JSON.parse(q)
-         for (var item in obj)
-            alert(item.id);
+        for (var item in q)
+            alert(q[item].id);
     }
 
     function clicked(){

@@ -27,7 +27,7 @@ public class LoaderJSONTest {
         assertNotEquals(null, loader.LoadResult2JSONOne("2020-11-0316:18:04витек"));
         System.out.println(loader.LoadResult2JSONOne("2020-11-0316:18:04витек"));
         FileOutputStream fos = new FileOutputStream("JSON.DUMP");
-        fos.write(loader.LoadResult2JSONOne("2020-11-0316:18:04витек").getBytes());
+        fos.write(loader.LoadResult2JSON("2020-11-0316:18:04витек").getBytes());
         fos.close();
     }
 }
