@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8" />
+        <title>React [RU] Tutorial v2</title>
+        <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+        <!-- Не используйте это в production -->
+        <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+</head>
+<body>
+<table>
+    <th class="text-center">HEAD1</th>
+    <th class="text-center">HEAD2</th>
+    <th class="text-center">HEAD3</th>
+    <tbody>
+    <tr><div id ="div1"></div></tr>
+
+
+    <div><tr><td>1</td><td>2</td><td>3</td></tr></div>
+    <tr><td>2</td><td>1</td><td>1</td></tr>
+    <tr><td>3</td><td>1</td><td>1</td></tr>
+    </tbody>
+</table>
+<script type="text/babel" src="js/Row.js"></script>
+<script type="text/babel">
+function tablecreate()
+{
+  var body = document.getElementsByTagName('body')[0];
+  var tbl = document.createElement('table');
+  tbl.style.width = '100%';
+  tbl.setAttribute('border', '1');
+  var tbdy = document.createElement('tbody');
+  for (var i = 1; i < 4; i++)
+  {
+    var tr = document.createElement('tr');
+    for (var j = 1; j < 4; j++)
+    {
+        var td = document.createElement('td');
+        var div = document.createElement("div");
+        var id = 'div'+i+j
+        console.log(id)
+        div.setAttribute("id", id);
+        td.appendChild(div)
+        tr.appendChild(td)
+    }
+  tbdy.appendChild(tr);
+  }
+  tbl.appendChild(tbdy);
+  body.appendChild(tbl)
+}
+
+function ReactRender()
+{
+  for (var i = 1; i < 4; i++)
+  {
+    for (var j = 1; j < 4; j++)
+    {
+        var id = 'div'+i+j
+        const json__ = {"id": id};
+        ReactDOM.render(<Row info={json__}/>, document.getElementById(id));
+    }
+  }
+}
+tablecreate();
+ReactRender();
+</script>
+</body>
+</html>
