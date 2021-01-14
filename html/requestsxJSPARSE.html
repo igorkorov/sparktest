@@ -123,7 +123,7 @@ let b = localStorage.getItem('maxitem');
                 var td = document.createElement('td');
                 td.setAttribute("align", "center");
                 var div = document.createElement("div");
-                var id = counter+j
+                var id = counter+'a'+j
                 console.log(id)
                 div.setAttribute("id", id);
                 td.appendChild(div)
@@ -147,8 +147,11 @@ let b = localStorage.getItem('maxitem');
 
     function flow(a222)
     {
+
         if (a222 == "'null'")
             return '';
+        if ((a222[0]=="'") && (a222[a222.length-1]=="'"))
+        return a222.substring(1, a222.length-1)
         return a222;
     }
 
@@ -177,7 +180,7 @@ let b = localStorage.getItem('maxitem');
         if ((input==null) || (compare==null) ||  (input.a ==0) ){
             return schoneJSON(input);
         }
-        var div = document.getElementById(String(rownumber)+5);
+        var div = document.getElementById(String(rownumber)+'a'+5);
         div.innerHTML = "";
 
         var p1 = document.createElement("p");
@@ -243,13 +246,13 @@ let b = localStorage.getItem('maxitem');
     function fillRow(a)
     {
        let index____ = String(a.id)
-       var id = document.getElementById(index____+0);
-       var datetimerequest = document.getElementById(index____+1);
-       var comment = document.getElementById(index____+2);
-       var initialdata = document.getElementById(index____+3);
-       var datetimeapprove = document.getElementById(index____+4);
-       var updateddata = document.getElementById(index____+5);
-       var datetimeupdate = document.getElementById(index____+6);
+       var id = document.getElementById(index____+'a'+0);
+       var datetimerequest = document.getElementById(index____+'a'+1);
+       var comment = document.getElementById(index____+'a'+2);
+       var initialdata = document.getElementById(index____+'a'+3);
+       var datetimeapprove = document.getElementById(index____+'a'+4);
+       var updateddata = document.getElementById(index____+'a'+5);
+       var datetimeupdate = document.getElementById(index____+'a'+6);
        id.innerHTML =''
        datetimerequest.innerHTML =''
        comment.innerHTML =''
@@ -298,7 +301,9 @@ let b = localStorage.getItem('maxitem');
     function new_withUpdate(){
       proccessJSON(new_withupdated)
     }
-
+    let str2 = "'7878778'"
+    alert(str2)
+    alert(flow("'7878778'"))
 
 //    new_withUpdate()
 </script>

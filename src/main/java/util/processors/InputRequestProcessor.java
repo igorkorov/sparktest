@@ -224,20 +224,20 @@ public class InputRequestProcessor {
             savedJSON = Beatyfulizer.compareundschoneJSON(ParcedJSON.parse(String.valueOf(data.get(5))), ParcedJSON.parse(String.valueOf(data.get(3))));
         int counter = (int) data.get(0);
         sb.append("<tr id=\""+numberrow+"\">");
-        sb.append("<td align=\"center\"><div id='"+counter+"0'>"+data.get(0)+"</div></td>");
-        sb.append("<td align=\"center\"><div id='"+counter+"1'>"+data.get(1)+"</div></td>");
-        sb.append("<td align=\"center\"><div id='"+counter+"2'>"+data.get(2)+"</div></td>");
-        sb.append("<td align=\"center\"><div id='"+counter+"3'>"+initialJSON+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"a0'>"+data.get(0)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"a1'>"+data.get(1)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"a2'>"+data.get(2)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"a3'>"+initialJSON+"</div></td>");
         if (data.get(4)==null)
-            sb.append("<td><div id='"+counter+"4'>"+"</div></td>");
+            sb.append("<td><div id='"+counter+"a4'>"+"</div></td>");
         else
-            sb.append("<td align=\"center\"><div id='"+counter+"4'>"+data.get(4)+"</div></td>");
-        sb.append("<td align=\"center\"><div id='"+counter+"5'>"+savedJSON+ "</div></td>");
+            sb.append("<td align=\"center\"><div id='"+counter+"a4'>"+data.get(4)+"</div></td>");
+        sb.append("<td align=\"center\"><div id='"+counter+"a5'>"+savedJSON+ "</div></td>");
         if (data.get(6)==null){
-            sb.append("<td><div id='"+counter+"6'>"+"</div></td>");
+            sb.append("<td><div id='"+counter+"a6'>"+"</div></td>");
         }
         else
-            sb.append("<td align=\"center\"><div id='"+counter+"6'>"+data.get(6)+"</div></td>");
+            sb.append("<td align=\"center\"><div id='"+counter+"a6'>"+data.get(6)+"</div></td>");
         return result;
 
     };

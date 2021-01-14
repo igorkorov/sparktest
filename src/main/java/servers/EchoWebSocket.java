@@ -1,7 +1,9 @@
 package servers;
 
+import Message.abstractions.BinaryMessage;
 import org.eclipse.jetty.websocket.api.*;
 import org.eclipse.jetty.websocket.api.annotations.*;
+import util.DB.DataBaseHelper;
 import util.Deps;
 import util.JSON.LoaderJSON;
 
@@ -16,17 +18,43 @@ import java.util.concurrent.*;
 public class EchoWebSocket {
     // Store sessions if you want to, for example, broadcast a message to all users
     private static final Queue<Session> sessions = new ConcurrentLinkedQueue<>();
-    public static Deps deps;
+    public static String binprops = "setts.bin";
+    private static abstractions.Settings setts;
 
-    public static void sendall(String id)  {
+    static {
+        try {
+            setts = (abstractions.Settings) BinaryMessage.restored(BinaryMessage.readBytes(binprops));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    static DataBaseHelper requests;//requests = new DataBaseHelper("requests");
+
+    static {
+        try {
+            requests = new DataBaseHelper(setts.requestsPOSTGRESConnect, true);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+
+    public  static LoaderJSON LoaderJSON  = new LoaderJSON(requests.executor );;
+
+    public static void sendall(String id) throws SQLException {
         ArrayList param = new ArrayList();
         param.add(id);
+        String req = LoaderJSON.LoadResult2JSON(id);
+        System.out.println("SEND MESSAGE::"+req);
         sessions.forEach(a-> {
+
             try {
-                a.getRemote().sendString(deps.LoaderJSON.LoadResult2JSON(id));
-            } catch (IOException | SQLException e) {
+                a.getRemote().sendString(req);
+            } catch (IOException e) {
                 e.printStackTrace();
             }
+
         });
     }
 
@@ -48,15 +76,5 @@ public class EchoWebSocket {
 
     }
 
-    public static  void sendall(){
-        sessions.forEach(a-> {
-            try {
-
-                a.getRemote().sendString("Получен новый запрос! проверьте таблицу");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-    }
 
 }

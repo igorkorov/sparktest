@@ -66,12 +66,17 @@ public class ServerAktor extends JAktor {
         fos.close();
 
         RequestMessage req = (RequestMessage) BinaryMessage.restored(message);
-        sendWebsocketAlerts(req.ID);
+
         if (req.type.equals(RequestMessage.Type.request)) {
             saveRequest(req);
 
             try {
                 saveinDB(req);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
+                sendWebsocketAlerts(req.ID);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
@@ -83,7 +88,11 @@ public class ServerAktor extends JAktor {
             } catch (SQLException | ParseException throwables) {
                 throwables.printStackTrace();
             }
-            sendWebsocketAlerts();
+            try {
+                sendWebsocketAlerts(req.ID);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
             return;
         }
         if (req.type.equals(RequestMessage.Type.ask)) {
@@ -94,7 +103,7 @@ public class ServerAktor extends JAktor {
 
     }
 
-    private void sendWebsocketAlerts(String id) {
+    private void sendWebsocketAlerts(String id) throws SQLException {
         EchoWebSocket.sendall(id);
     }
 
@@ -128,9 +137,6 @@ public class ServerAktor extends JAktor {
         }
     };
 
-    public void sendWebsocketAlerts(){
-        EchoWebSocket.sendall();
-    };
 
     public void saveinDB(RequestMessage requestMessage) throws SQLException {
         irp.saveRequestinDB(requestMessage);

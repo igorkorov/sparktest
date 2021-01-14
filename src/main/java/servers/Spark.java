@@ -247,7 +247,7 @@ public class Spark {
         });
 
         get("/send", (req, res) ->{
-            EchoWebSocket.sendall();
+            EchoWebSocket.sendall("2019-09-0709:26:42багайцев");
             return eng.render(OK);
         });
 
